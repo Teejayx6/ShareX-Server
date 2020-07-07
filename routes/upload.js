@@ -14,6 +14,22 @@ toUpperCaseLetter = function (word) {
 };
 
 module.exports = (req, res) => {
+
+    //simple shit fix
+    if (req.files) {
+        if (req.files.fdataUploader) {
+            let user = 'public';
+            let fileExt = path.extname(req.files.fdataUploader.name);
+            let newFileName = words[Math.floor(Math.random() * 100000)] + words[Math.floor(Math.random() * 100000)] + words[Math.floor(Math.random() * 100000)] + fileExt;
+            let filePath = 'uploads' + '/public/' + newFileName;
+            return req.files.fdataUploader.mv(filePath, (err) => {
+                if (err) res.send(err);
+                else return res.redirect("/?green=" + config.protocol + config.serverUrl + config.port + '/' + user + '/' + newFileName);
+            });
+        }
+    }
+    //simple shit fix
+
     if (!req.body.u || !users[req.body.u]) return res.status(400).send(JSON.stringify({
         success: false,
         error: {

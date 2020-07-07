@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>Upload</title>
+    <link rel="stylesheet" href="/css/upload.css" type="text/css">
+    <link rel="stylesheet" href="/css/topnav.css" type="text/css">
+    <link rel="shortcut icon" href="http://localhost:6969/favicon.png">
+</head>
+
+<body style="background-color: rgb(59,59,59);">
+
+    <%if (!req.query.u) return res.redirect('/ulogin');
+    if (!req.query.p) return res.redirect('/ulogin'); 
+    if(!config.users[req.query.u] || config.users[req.query.u] !== req.query.p) return res.status(302).redirect("/ulogin?message=Incorrect username or password")%>
+
+
+
+
+    <div class="topnav" id="colorbar">
+        <a class="active" href="/">Home</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/upload">Upload</a>
+        <a href="/about">About</a>
+        <a class="right" href="/terano">Terano</a>
+    </div>
+
+
+    <div class="upload">
+        <form action=" /upload" method="post" enctype="multipart/form-data" name="fdataForm">
+            <div class="imgcontainer">
+                <img src="/terano-2048.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="form-group"><input type="file" id="fdataUploader" name="fdataUploader" class="inputFile"
+                    required /></div>
+
+            <label for='fdataUploader' id='#fdataUploaderLabel'>Choose a file</label>
+            <div class="form-group"><button id='file' type="submit"
+                    style="background-color: rgb(230,94,94); ">Upload</button></div>
+        </form>
+    </div>
+
+</body>
+
+
+<div class='footer'>
+    <p>Created By: MILLION#1321<br>
+        <a href="https://discord.com/baNjgsX">Discord Server</a></p>
+</div>
+
+</html>

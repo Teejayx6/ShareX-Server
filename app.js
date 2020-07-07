@@ -53,21 +53,22 @@ app.use(express.static(`${__dirname}/uploads/`));
 app.use(express.static(__dirname + '/public/'));
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => { return res.status(200).render('index'); });
 app.get('/urls', (req, res) => { return routes.urls(req, res); });
-app.get('/login', (req, res) => { return res.status(200).render('login', { req: req, res: res }); });
-// app.get('/upload', (req, res) => { return res.status(200).render('upload'); });
+app.get('/gallery', (req, res) => { return routes.urls(req, res); });
+
+app.get('/', (req, res) => { return res.status(200).render('index', { req: req, res: res, config: config }); });
+app.get('/glogin', (req, res) => { return res.status(200).render('glogin', { req: req, res: res, config: config }); }); ///fix tshis shits awudawpdk
+app.get('/ulogin', (req, res) => { return res.status(200).render('ulogin', { req: req, res: res, config: config }); }); ///fix tshis shits awudawpdk
+app.get('/upload', (req, res) => { return res.status(200).render('upload', { req: req, res: res, config: config }); });
 // app.get('/about', (req, res) => { return res.status(200).render('about'); });
 app.get('/404', (req, res) => { return res.status(200).render('404', { query: req.query.message }); });
-app.get('/gallery', (req, res) => { return routes.urls(req, res); });
+
 app.get('/terano', (req, res) => { return res.status(200).redirect('https://top.gg/bot/647256366280474626'); });
 app.get('/*', (req, res) => { return res.status(200).redirect(`${config.protocol}${config.serverUrl}:${config.port}/404`); });
 
 
 app.post('/upload', (req, res) => routes.uploads(req, res));
 
-// app.get('*', (req, res) => { return res.status(200).send(`<html><code>200 kid</code></html>`); });
-// app.post('*', (req, res) => { return res.status(200).send(`<html><code>200 kid</code></html>`); });
 
 app.listen(PORT, () => {
     logger.success(`Now listening on port ${PORT}`);

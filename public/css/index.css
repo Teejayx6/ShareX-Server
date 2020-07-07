@@ -4,8 +4,10 @@ html {
 }
 
 body{
+   background: linear-gradient(157deg, rgba(0,0,0,1) 0%, rgba(32,0,98,1) 35%, rgba(0,81,97,1) 100%);
+    /* background-color: #888; */
+    background-position: 10%;
     font-family: 'Lato', sans-serif;
-    color: #888;
     margin: 0;
 }
 

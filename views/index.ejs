@@ -18,11 +18,17 @@
     </div>
 
     <div id="main">
+
+        <% if(req.query.green) { %>
+        <input class='green' type="text" onclick="copyLink()" value="<%=req.query.green%>">
+        <% } %>
+
         <div class="desc">
             <p1>terano.dev</p1><br>
             <p2>MILLION#1321's<br>ShareX Server</p2>
             <p3><br><br><br><br><br><br><br><br><br><br><br><br></p3>
         </div>
+
         <div class="info">
             <p3>This is a fun project</p3><br>
             <p3>I don't plan to make anything out of it.</p3><br>
@@ -30,5 +36,10 @@
         </div>
     </div>
 </body>
+
+<div class='footer'>
+    <p>Created By: MILLION#1321<br>
+        <a href="https://discord.com/baNjgsX">Discord Server</a></p>
+</div>
 
 </html>
