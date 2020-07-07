@@ -2,7 +2,7 @@
 
 ---
 
-##Things to do:
+#Things to do:
 
 1. Code fast DB (rethinkdb)
 2. Fix it so users and passwords aren't easy to view
