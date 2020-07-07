@@ -4,9 +4,9 @@
     },
     "fileSizeLimit": 52428800,
     "defaultFileNameLength": 3,
-    "serverUrl": "localhost",
-    "protocol": "http://",
-    "port": 6969,
+    "serverUrl": "terano.dev",
+    "protocol": "https://",
+    "port": 443,
     "fileExtensionCheck": {
         "enabled": false,
         "extensionsAllowed": [

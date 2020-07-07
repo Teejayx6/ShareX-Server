@@ -2,7 +2,7 @@ const config = require('./config.json');
 const users = config.users;
 const keys = config.keys;
 
-const PORT = config.port;
+const PORT = 6969;
 
 const fs = require('fs');
 const path = require('path');
