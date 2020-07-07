@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>ERROR 404</title>
+    <link rel="stylesheet" href="/css/404.css" type="text/css">
+    <link rel="stylesheet" href="/css/topnav.css" type="text/css">
+    <link rel="shortcut icon" href="http://localhost:6969/favicon.png">
+</head>
+
+<body style="background-color: rgb(59,59,59);">
+
+    <div class="topnav" id="colorbar">
+        <a class="active" href="/">Home</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/upload">Upload</a>
+        <a href="/about">About</a>
+        <a class="right" href="/terano">Terano</a>
+    </div>
+
+    <% if (query) { %>
+    <div id="main">
+        <div class="fof">
+            <h1 style="color:  rgb(230, 94, 94);">Error 404<br><br><br>
+                <%=query%>
+            </h1>
+        </div>
+    </div>
+    <% } else { %>
+    <div id="main">
+        <div class="fof">
+            <h1 style="color:  rgb(230, 94, 94);">Error 404</h1>
+        </div>
+    </div>
+    <% } %>
+</body>
+
+</html>

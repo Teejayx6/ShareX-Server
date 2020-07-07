@@ -1,0 +1,30 @@
+#colorbar{
+  width: 100%; height: 48px;
+  background-color: rgb(34, 34, 34);;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  background-color: rgb(34, 34, 34);
+  text-align: center;
+  padding: 14px 14px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: rgb(230, 94, 94);
+  color: white;
+}
+
+.topnav a.right {
+    float: right;
+    background-color: rgb(230, 94, 94);
+    color: white;
+}

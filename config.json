@@ -1,0 +1,19 @@
+{
+    "users": {
+        "million": "password"
+    },
+    "fileSizeLimit": 52428800,
+    "defaultFileNameLength": 3,
+    "serverUrl": "localhost",
+    "protocol": "http://",
+    "port": 6969,
+    "fileExtensionCheck": {
+        "enabled": false,
+        "extensionsAllowed": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".gif"
+        ]
+    }
+}
