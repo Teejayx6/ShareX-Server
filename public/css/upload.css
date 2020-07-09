@@ -1,95 +1,80 @@
-html {
-    height: 100%;
-    background-color:  rgb(59,59,59);
+body {
+  font-family: "Lato", sans-serif;
+  background-color: rgb(59, 59, 59);
+  margin: 0;
 }
 
-body{
-   background: linear-gradient(157deg, rgba(0,0,0,1) 0%, rgba(32,0,98,1) 35%, rgba(0,81,97,1) 100%);
-    /* background-color: #888; */
-    background-position: 10%;
-    font-family: 'Lato', sans-serif;
-    margin: 0;
+.upload {
+  text-align: center;
 }
-
-#main{
-    display: table;
-    width: 100%;
-    height: 25vh;
-    text-align: center;
-}
-
-.upload{
-    text-align: center;
-    color: white;
-}
-
-/* #upload {
-    color: red;
-} */
-
 
 .inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
-label  {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
+label {
+  width: 300px;
+  height: 20px;
+  font-size: 20px;
+  color: white;
+  display: inline-block;
+  background-color: rgb(230, 94, 94);
+  padding: 7px 14px;
+  border-radius: 5px;
+  margin: 10px 10px;
 }
 
-.inputfile, label {
-    background-color: red;
-}
-
- label {
-    width: 300px;
-    height: 20px;
-    color: white;
-    background-color: rgb(230,94,94);
-    padding: 7px 14px;
-    border: none;
-    border-radius: 10px;
-    margin: 10px 10px;
-    cursor: pointer;
-}
 label:hover {
-    opacity: 80%;
+  opacity: 80%;
+  cursor: pointer;
 }
 
+.keyform {
+  color: black;
+  text-align: center;
+  width: 320px;
+  height: 33px;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 10px;
+  cursor: auto;
+}
+
+.keyform::placeholder {
+  text-align: center;
+  color: black;
+}
 
 button {
-    width: 100px;
-    height: 30px;
-    color: white;
-    background-color: rgb(230,94,94);
-    padding: 7px 14px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 10px 10px;
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: rgb(230, 94, 94);
+  margin: 10px 10px;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 button:hover {
-    color: white;
-    background-color: rgb(230,94,94);
-    padding: 7px 14px;
-    border: none;
-    border-radius: 10px;
-    opacity: 80%;
+  color: white;
+  background-color: rgb(230, 94, 94);
+  padding: 7px 14px;
+  border: none;
+  opacity: 80%;
 }
 
 .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
+  margin: 24px 0 12px 0;
 }
 
 img.avatar {
-    width: 20%;
+  width: 20%;
+  border-radius: 5%;
 }

@@ -1,0 +1,31 @@
+body {
+  font-family: "Lato", sans-serif;
+  background-color: rgb(59, 59, 59);
+  margin: 0;
+}
+#main {
+  width: 100%;
+  text-align: center;
+}
+
+p1 {
+  font-size: 70px;
+  color: rgb(240, 94, 94);
+}
+
+p2 {
+  font-size: 50px;
+}
+
+.info {
+  width: 100%;
+  vertical-align: center;
+  text-align: center;
+  color: black;
+}
+
+p3,
+p4,
+p5 {
+  font-size: 30px;
+}

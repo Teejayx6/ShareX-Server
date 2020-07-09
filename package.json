@@ -1,35 +1,25 @@
 {
-  "name": "sharex-upload-server",
-  "version": "0.2.2",
-  "description": "ShareX upload server",
+  "name": "sharex-server",
+  "version": "1.0.0",
+  "description": "",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Moquo/node-sharex-upload-server.git"
-  },
-  "keywords": [
-    "sharex",
-    "upload",
-    "server"
-  ],
-  "author": "Moquo",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Moquo/node-sharex-upload-server/issues"
-  },
-  "homepage": "https://github.com/Moquo/node-sharex-upload-server#readme",
   "dependencies": {
     "an-array-of-english-words": "^2.0.0",
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.19.0",
     "colors": "^1.4.0",
+    "discord-webhook-node": "^1.1.0",
     "ejs": "^3.1.3",
-    "express": "^4.16.2",
-    "express-fileupload": "^0.3.0",
-    "file-exists": "^5.0.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "mongoose": "^5.9.22",
     "morgan": "^1.10.0",
-    "random-string": "^0.2.0"
-  }
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo Starting ShareX Server in test mode && nodemon app.js",
+    "start": "echo Starting ShareX Server && node app.js"
+  },
+  "author": "",
+  "license": "ISC"
 }

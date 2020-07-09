@@ -1,21 +1,23 @@
-const fs = require('fs');
-const config = require('../config.json');
-
+const userModel = require('../models/user.js');
+const fileModel = require('../models/file.js');
 const path = require('path');
+module.exports = async (req, res) => {
+    if (!req.query.key) return res.redirect('/login');
+    let userData = await userModel.findOne({ key: req.query.key });
+    if (!userData) return res.redirect('/login?message=Incorrect Key');
 
+    let userLogins = userData.logins;
+    let newUserLogins = userLogins + 1;
+    await userModel.findOneAndUpdate({ key: req.query.key }, { logins: newUserLogins });
 
-module.exports = (req, res) => {
-    if (!req.query.u) return res.redirect('/glogin');
-    if (!req.query.p) return res.redirect('/glogin');
-    if (!config.users[req.query.u] || config.users[req.query.u] !== req.query.p) return res.status(302).redirect("/glogin?message=Incorrect username or password");
-    let path2 = `./uploads/${req.query.u}/`;
-    if (fs.existsSync(path2)) {
-        let files = fs.readdirSync(`./uploads/${req.query.u}/`);
+    let userName = userData.name;
+    let files = await fileModel.find({ uploader: userName });
 
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(400).send(files.join('\n'));
-    } else {
-        res.setHeader('Content-Type', 'application/json');
-        return res.status(404).send('404 User Not Found');
-    }
+    let fileNameArray = [];
+    files.forEach(f => {
+        fileNameArray.push(f.name);
+    });
+
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(400).send(`Files:\n${fileNameArray.join('\n')}\nIf you do not see any names, its cuz u upload none lmao`);
 };

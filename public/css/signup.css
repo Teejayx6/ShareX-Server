@@ -1,0 +1,27 @@
+body {
+  font-family: "Lato", sans-serif;
+  background-color: rgb(59, 59, 59);
+  margin: 0;
+}
+
+#main {
+  text-align: center;
+}
+
+input[type="password"],
+[type="text"] {
+  border: none;
+  text-align: center;
+  width: 250px;
+  padding: 12px 20px;
+  margin: 10px 10px;
+}
+
+#submit {
+  background-color: rgb(230, 94, 94);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  color: white;
+  width: 250px;
+}

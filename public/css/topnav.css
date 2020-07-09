@@ -1,5 +1,6 @@
-#colorbar{
-  width: 100%; height: 48px;
+#colorbar {
+  width: 100%;
+  height: 48px;
   background-color: rgb(34, 34, 34);
 }
 
@@ -24,9 +25,9 @@
 }
 
 .topnav a.right {
-    float: right;
-    background-color: rgb(230, 94, 94);
-    color: white;
+  float: right;
+  background-color: rgb(230, 94, 94);
+  color: white;
 }
 
 .footer {
@@ -35,7 +36,7 @@
   width: 100%;
   text-align: center;
   padding: 3px;
-  background-color: rgb(34, 34, 34);;
+  background-color: rgb(34, 34, 34);
   color: #888;
 }
 

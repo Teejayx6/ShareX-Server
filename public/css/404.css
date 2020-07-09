@@ -1,37 +1,24 @@
-*{
-    transition: all 0s
+body {
+  font-family: "Lato", sans-serif;
+  background-color: rgb(59, 59, 59);
+  margin: 0;
 }
 
-html {
-    height: 100%;
+#main {
+  width: 100%;
+  text-align: center;
 }
 
-body{
-    font-family: 'Lato', sans-serif;
-    color: #888;
-    margin: 0;
+.fof h1 {
+  font-size: 50px;
+  color: rgb(230, 94, 94);
 }
 
-#main{
-    display: table;
-    width: 100%;
-    height: 100vh;
-    text-align: center;
-}
-
-.fof{
-	  display: table-cell;
-	  vertical-align: middle;
-}
-
-.fof h1{
-	  font-size: 50px;
-	  display: inline-block;
-	  padding-right: 12px;
-	  animation: type .5s alternate initial;
-}
-
-@keyframes type{
-	  from{box-shadow: inset -3px 0px 0px #888;}
-	  to{box-shadow: inset -3px 0px 0px transparent;}
+@keyframes type {
+  from {
+    box-shadow: inset -3px 0px 0px #888;
+  }
+  to {
+    box-shadow: inset -3px 0px 0px transparent;
+  }
 }
