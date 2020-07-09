@@ -5,8 +5,8 @@
     "fileSizeLimits": 268435456,
     "webhookurl": "https://discordapp.com/api/webhooks/730694050642001991/pO1ya_feTIplYjJpS_xR9R1Vqdrw2bVc3J6tjML_okXq9BeeR8gRMFNIOt0eGf-Jmb0M",
     "atlas": {
-        "username": "million",
-        "password": "junSFC5JTu4wScb",
-        "cluster": "cluster0-fxkr7.mongodb.net"
+        "username": "USERNAME",
+        "password": "PASSWORD",
+        "cluster": "CLUSTER"
     }
 }
