@@ -14,3 +14,18 @@ Feel free to PR it if you find any flaws in the code.
 ### 1. Figure out how to redirect a request if from a web browser only
 
 ---
+
+example config.json
+```js
+{
+    "port": 80,
+    "url": "localhost",
+    "protocol": "http://",
+    "fileSizeLimits": 268435456,
+    "webhookurl": "DISCORD WEBHOOK URL",
+    "atlas": {
+        "username": "USERNAME",
+        "password": "PASSWORD",
+        "cluster": "CLUSTER"
+    }
+}```
