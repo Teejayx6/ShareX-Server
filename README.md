@@ -28,7 +28,8 @@ Example config.json
         "password": "PASSWORD",
         "cluster": "CLUSTER"
     }
-}```
+}
+```
 
 ---
 
@@ -47,4 +48,5 @@ Example ShareX Config
   "FileFormName": "file",
   "URL": "$json:file.url$",
   "DeletionURL": "$json:file.delete_url$"
-}```
+}
+```
