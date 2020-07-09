@@ -15,8 +15,8 @@ Feel free to PR it if you find any flaws in the code.
 
 ---
 
-example config.json
-```js
+Example config.json
+```json
 {
     "port": 80,
     "url": "localhost",
