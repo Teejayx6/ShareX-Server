@@ -11,6 +11,6 @@ Feel free to PR it if you find any flaws in the code.
 
 ## To do list:
 
-### 3. Figure out how to redirect a request if from a web browser only
+### 1. Figure out how to redirect a request if from a web browser only
 
 ---
