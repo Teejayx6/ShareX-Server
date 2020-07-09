@@ -29,3 +29,22 @@ Example config.json
         "cluster": "CLUSTER"
     }
 }```
+
+---
+
+Example ShareX Config
+```json
+{
+  "Version": "13.1.0",
+  "DestinationType": "ImageUploader, FileUploader",
+  "RequestMethod": "POST",
+  "RequestURL": "http(s)://YOURURL/upload",
+  "Body": "MultipartFormData",
+  "Arguments": {
+    "FNL": "FILENAMELENGTHHERE",
+    "key": "YOURKEYHERE"
+  },
+  "FileFormName": "file",
+  "URL": "$json:file.url$",
+  "DeletionURL": "$json:file.delete_url$"
+}```
