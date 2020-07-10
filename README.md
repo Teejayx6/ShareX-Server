@@ -11,7 +11,7 @@ Feel free to PR it if you find any flaws in the code.
 
 ## To do list:
 
-### 1. Add Rate-Limits
+### 1. Add Ratelimits
 
 ### 2. Add a user dashboard for file deletion 
 
