@@ -33,7 +33,8 @@ module.exports = async (req, res) => {
             uploads: 0,
             owner: false,
             admin: false,
-            allowed: false
+            allowed: false,
+            redirects: 0
         });
 
         fs.mkdirSync(`${path.resolve("uploads")}\\${user}`);

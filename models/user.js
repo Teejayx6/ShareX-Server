@@ -8,7 +8,8 @@ const UserSchema = mongoose.Schema({
     uploads: Number,
     owner: Boolean,
     admin: Boolean,
-    allowed: Boolean
+    allowed: Boolean,
+    redirects: Number,
 });
 
 module.exports = mongoose.model("users", UserSchema);

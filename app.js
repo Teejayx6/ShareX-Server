@@ -41,10 +41,12 @@ app.get('/gallery', (req, res) => { return router.gallery(req, res); });
 app.get('/signup', (req, res) => { return router.signup(req, res); });
 app.get('/delete/*', (req, res) => { return router.delete(req, res); });
 app.get('/files/*', (req, res) => { return router.files(req, res); });
+app.get('/url/:number', (req, res) => { return router.url(req, res); });
 
 app.get('/terano', (req, res) => { return res.status(200).redirect('https://top.gg/bot/647256366280474626'); });
 app.get('*', (req, res) => { return res.render('404.ejs', { req: req, res: res }); });
 
+app.post('/url', (req, res) => { return router.apiUrl(req, res); });
 app.post('/upload', (req, res) => { router.apiUpload(req, res); });
 
 app.listen(config.port, () => { console.log(`Starting ShareX Server on port: `.green + `${config.port}`.white); });
