@@ -1,30 +1,31 @@
 <html>
-  <head>
-    <title>Upload Login</title>
-    <link rel="stylesheet" href="/css/login.css" type="text/css" />
-    <link rel="stylesheet" href="/css/topnav.css" type="text/css" />
-    <link rel="shortcut icon" href="http://localhost:6969/favicon.png" />
-  </head>
 
-  <body>
-    <div class="topnav" id="colorbar">
-      <a class="active" href="/">Home</a>
-      <a href="/login">Gallery</a>
-      <a href="/upload">Upload</a>
-      <a href="/about">About</a>
-      <a class="right" href="/terano">Terano</a>
-    </div>
+<head>
+  <title>Upload Login</title>
+  <link rel="stylesheet" href="/css/login.css" type="text/css" />
+  <link rel="stylesheet" href="/css/topnav.css" type="text/css" />
+  <link rel="shortcut icon" href="https://terano.dev/favicon.ico" />
+</head>
 
-    <div id="main">
-      <form action="/gallery">
-        <%if(req.query.message) {%>
-        <button class="message" type="button">
-          <%=req.query.message%>
-        </button>
-        <%}%>
+<body>
+  <div class="topnav" id="colorbar">
+    <a class="active" href="/">Home</a>
+    <a href="/login">Gallery</a>
+    <a href="/upload">Upload</a>
+    <a href="/about">About</a>
+    <a class="right" href="/terano">Terano</a>
+  </div>
+
+  <div id="main">
+    <form action="/gallery">
+      <%if(req.query.message) {%>
+      <button class="message" type="button">
+        <%=req.query.message%>
+      </button>
+      <%}%>
 
         <div class="imgcontainer">
-          <img src="/terano-2048.png" alt="Avatar" class="avatar" />
+          <img src="https://cdn.discordapp.com/emojis/730628505628311552.gif" alt="Avatar" class="avatar" />
         </div>
         <div class="container">
           <input

@@ -88,7 +88,7 @@ module.exports = async (req, res) => {
             path: uploadPath,
             name: uploadPath.split('/')[2],
             UploadedAt: new Date,
-            Views: 0,
+            views: 0,
             lock: {
                 active: locked,
                 password: password

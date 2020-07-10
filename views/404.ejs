@@ -1,45 +1,48 @@
 <html>
-  <head>
-    <title>ERROR 404</title>
-    <link rel="stylesheet" href="/css/404.css" type="text/css" />
-    <link rel="stylesheet" href="/css/topnav.css" type="text/css" />
-    <link rel="shortcut icon" href="http://localhost:6969/favicon.png" />
-  </head>
 
-  <body>
-    <div class="topnav" id="colorbar">
-      <a class="active" href="/">Home</a>
-      <a href="/login">Gallery</a>
-      <a href="/upload">Upload</a>
-      <a href="/about">About</a>
-      <a class="right" href="/terano">Terano</a>
-    </div>
+<head>
+  <title>ERROR 404</title>
+  <link rel="stylesheet" href="/css/404.css" type="text/css" />
+  <link rel="stylesheet" href="/css/topnav.css" type="text/css" />
+  <link rel="shortcut icon" href="https://terano.dev/favicon.ico" />
+  <meta content="404 - Page Not Found" property="og:title">
+</head>
 
-    <% if (req.query.message) { %>
-    <div id="main">
-      <div class="fof">
-        <h1>
-          Error 404<br /><br /><br />
-          <%=req.query.message%>
-        </h1>
-      </div>
-    </div>
-
-    <% } else { %>
-
-    <div id="main">
-      <div class="fof">
-        <h1>Error 404</h1>
-      </div>
-    </div>
-
-    <% } %>
-  </body>
-
-  <div class="footer">
-    <p>
-      Created By: MILLION#1321<br />
-      <a href="https://discord.gg/hFzT9jm">Discord Server</a>
-    </p>
+<body>
+  <div class="topnav" id="colorbar">
+    <a class="active" href="/">Home</a>
+    <a href="/login">Gallery</a>
+    <a href="/upload">Upload</a>
+    <a href="/about">About</a>
+    <a class="right" href="/terano">Terano</a>
   </div>
+
+  <% if (req.query.message) { %>
+  <div id="main">
+    <div class="fof">
+      <h1>
+        Error 404<br /><br /><br />
+        <%=req.query.message%>
+      </h1>
+    </div>
+  </div>
+
+  <% } else { %>
+
+  <div id="main">
+    <div class="fof">
+      <h1>Error 404</h1>
+    </div>
+  </div>
+
+  <% } %>
+</body>
+
+<div class="footer">
+  <p>
+    Created By: MILLION#1321<br />
+    <a href="https://discord.gg/hFzT9jm">Discord Server</a>
+  </p>
+</div>
+
 </html>

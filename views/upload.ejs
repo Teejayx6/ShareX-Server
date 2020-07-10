@@ -1,56 +1,47 @@
 <html>
-  <head>
+
+<head>
     <title>Upload</title>
     <link rel="stylesheet" href="/css/upload.css" type="text/css" />
     <link rel="stylesheet" href="/css/topnav.css" type="text/css" />
-    <link rel="shortcut icon" href="http://localhost:6969/favicon.png" />
-  </head>
+    <link rel="shortcut icon" href="https://terano.dev/favicon.ico" />
+</head>
 
-  <body>
+<body>
     <div class="topnav" id="colorbar">
-      <a class="active" href="/">Home</a>
-      <a href="/login">Gallery</a>
-      <a href="/upload">Upload</a>
-      <a href="/about">About</a>
-      <a class="right" href="/terano">Terano</a>
+        <a class="active" href="/">Home</a>
+        <a href="/login">Gallery</a>
+        <a href="/upload">Upload</a>
+        <a href="/about">About</a>
+        <a class="right" href="/terano">Terano</a>
     </div>
 
     <div class="upload">
-      <form
-        action=" /upload"
-        method="POST"
-        enctype="multipart/form-data"
-        name="file"
-      >
-        <div class="imgcontainer">
-          <img src="/terano-2048.png" alt="Avatar" class="avatar" />
-        </div>
+        <form action=" /upload" method="POST" enctype="multipart/form-data" name="file">
+            <div class="imgcontainer">
+                <img src="/terano-2048.png" alt="Avatar" class="avatar" />
+            </div>
 
-        <div class="form-group">
-          <input type="file" id="file" name="file" class="inputFile" required />
-        </div>
+            <div class="form-group">
+                <input type="file" id="file" name="file" class="inputFile" required />
+            </div>
 
-        <label for="file" id="#fdataUploaderLabel">Choose a file</label><br />
-        <input
-          name="key"
-          type="text"
-          class="keyform"
-          placeholder="Key"
-          required
-        />
-        <div class="form-group">
-          <button id="file" type="submit">
-            Upload
-          </button>
-        </div>
-      </form>
+            <label for="file" id="#fdataUploaderLabel">Choose a file</label><br />
+            <input name="key" type="text" class="keyform" placeholder="Key" required />
+            <div class="form-group">
+                <button id="file" type="submit">
+                    Upload
+                </button>
+            </div>
+        </form>
     </div>
-  </body>
+</body>
 
-  <div class="footer">
+<div class="footer">
     <p>
-      Created By: MILLION#1321<br />
-      <a href="/discord">Discord Server</a>
+        Created By: MILLION#1321<br />
+        <a href="/discord">Discord Server</a>
     </p>
-  </div>
+</div>
+
 </html>
