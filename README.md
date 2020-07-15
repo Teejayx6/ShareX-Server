@@ -11,7 +11,13 @@ Feel free to PR it if you find any flaws in the code.
 
 ## To do list:
 
-### 1. Figure out how to redirect a request if from a web browser only
+### 1. Add Ratelimits
+
+### 2. Add a user dashboard for file deletion 
+
+### 3. Add an admin dashboard
+
+### 4. Learn and use propper html
 
 ---
 
@@ -33,13 +39,13 @@ Example config.json
 
 ---
 
-Example ShareX Config
+Example ShareX Image Upload Config
 ```json
 {
   "Version": "13.1.0",
-  "DestinationType": "ImageUploader, FileUploader",
+  "DestinationType": "ImageUploader, TextUploader, FileUploader",
   "RequestMethod": "POST",
-  "RequestURL": "http(s)://YOURURL/upload",
+  "RequestURL": "http://YOURURL/upload",
   "Body": "MultipartFormData",
   "Arguments": {
     "FNL": "FILENAMELENGTHHERE",
@@ -48,5 +54,23 @@ Example ShareX Config
   "FileFormName": "file",
   "URL": "$json:file.url$",
   "DeletionURL": "$json:file.delete_url$"
+}
+```
+
+---
+
+Example ShareX URL Shortener Config
+```json
+{
+  "Version": "13.1.0",
+  "DestinationType": "URLshortener",
+  "RequestMethod": "POST",
+  "RequestURL": "http(s)://YOURURL/upload",
+  "Body": "MultipartFormData",
+  "Arguments": {
+    "url": "$input$",
+    "key": "YOURKEYHERE"
+  },
+  "URL": "$json:url$",
 }
 ```

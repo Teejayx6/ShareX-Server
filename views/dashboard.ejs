@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>ERROR 404</title>
+    <link rel="stylesheet" href="/css/dashboard.css" type="text/css" />
+    <link rel="stylesheet" href="/css/topnav.css" type="text/css" />
+    <link rel="shortcut icon" href="https://terano.dev/favicon.png" />
+    <meta content="404 - Page Not Found" property="og:title">
+</head>
+
+<body>
+    <div class="topnav" id="colorbar">
+        <a class="active" href="/">Home</a>
+        <a href="/login">Gallery</a>
+        <a href="/upload">Upload</a>
+        <a href="/about">About</a>
+        <a class="right" href="/terano">Terano</a>
+    </div>
+
+    <div class="urls">
+        <a>URLS</a><br>
+        <% urls.forEach(e => {%>
+
+        <a href="<%=e.redirect%>"><%=e.id%></a><br>
+
+        <% }) %>
+    </div>
+
+    <div class="images">
+        <a>Images</a><br>
+        <% files.forEach(e => {
+        if(e.name.endsWith(".png" || ".jpg")) {%>
+
+        <img src="https://terano.dev/files/<%=e.numbe%>r" alt="<%=e.name%>"><br>
+        <%}%>
+        <% }) %>
+    </div>
+
+
+</body>
+
+<div class="footer">
+    <p>
+        Created By: MILLION#1321<br />
+        <a href="https://discord.gg/hFzT9jm">Discord Server</a>
+    </p>
+</div>
+
+</html>

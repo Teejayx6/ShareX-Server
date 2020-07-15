@@ -41,6 +41,8 @@
 
 a:link {
   color: #888;
+  /* text-decoration-color: #888; */
+  text-decoration: none;
 }
 
 .green {
