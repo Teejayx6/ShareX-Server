@@ -7,15 +7,8 @@ app.use(express.static(`${__dirname}/uploads/`));
 app.use(express.static(__dirname + '/public/'));
 app.set('view engine', 'ejs');
 
-let connectUri = `mongodb+srv://${config.atlas.username}:${config.atlas.password}@${config.atlas.cluster}/sharex-test`;
-// let connectUri = `mongodb://localhost/sharex`;
-
-// const { connect } = require('mongoose');
-// connect(`mongodb://localhost/sharex`, {
-//     useNewUrlParser: true,
-//     useFindAndModify: false,
-//     useUnifiedTopology: true
-// });
+//let connectUri = `mongodb+srv://${config.atlas.username}:${config.atlas.password}@${config.atlas.cluster}/sharex-test`;
+let connectUri = `mongodb://localhost/sharex`;
 
 const { connect } = require('mongoose');
 connect(connectUri, {
