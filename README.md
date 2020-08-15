@@ -11,13 +11,11 @@ Feel free to PR it if you find any flaws in the code.
 
 ## To do list:
 
-### 1. Add Ratelimits
+### 1. Add a user dashboard for file deletion 
 
-### 2. Add a user dashboard for file deletion 
+### 2. Add an admin dashboard
 
-### 3. Add an admin dashboard
-
-### 4. Learn and use propper html
+### 3. Learn and use propper html
 
 ---
 
