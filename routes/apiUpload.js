@@ -29,12 +29,6 @@ router.use(new RateLimit({
     max: 25
 }));
 
-const morgan = require('morgan');
-const colors = require('colors');
-morgan.token('ip2', function (req, res) { return req.ip.replace('::ffff:', '').replace('::1', 'localhost'); });
-router.use(morgan(`${colors.cyan(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "POST"; } }));
-router.use(morgan(`${colors.green(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "GET"; } }));
-
 let toUpperCaseLetter = (word) => {
     let output = word.charAt(0).toUpperCase() + word.slice(1);
     return output;
