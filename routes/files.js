@@ -5,7 +5,7 @@ const { existsSync } = require('fs');
 const router = Router();
 
 let fileModel = require('../models/file');
-let fofFilePath = resolve(`${__dirname}/../assets/404.png`);
+let fofFilePath = resolve(`${__dirname}/../public/404.png`);
 
 router.get("/files/:name", async (req, res) => {
     let fileName = req.params.name;
@@ -27,7 +27,7 @@ let sendFile = (res, Path) => {
 };
 
 let fof = (res) => {
-    sendFile(res, fofFilePath);
+    res.status(203).redirect('/404.html');
     return;
 };
 

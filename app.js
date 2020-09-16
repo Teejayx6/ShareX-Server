@@ -15,6 +15,7 @@ mongoose.connect(connectURI, {
 
 const express = require('express');
 let app = express();
+app.use(express.static(__dirname + '/public/'));
 router.setup(app);
 app.get('/*', (req, res) => { return res.status(404).send('Error 404'); });
 
