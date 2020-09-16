@@ -27,7 +27,7 @@ let sendFile = (res, Path) => {
 };
 
 let fof = (res) => {
-    sendFile(fofFilePath);
+    sendFile(res, fofFilePath);
     return;
 };
 
