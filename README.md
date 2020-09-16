@@ -2,73 +2,15 @@
 
 ---
 
-## I am not sure why I made this but it was fun
+## About
 
-It is not very advanced, I just wanted to make one that had enough features that I could actually use it.
-Feel free to PR it if you find any flaws in the code.
+This is a sharex server that I made lol
 
----
-
-## To do list:
-
-### 1. Add a user dashboard for file deletion 
-
-### 2. Add an admin dashboard
-
-### 3. Learn and use propper html
+gl if u want to host it?
 
 ---
 
-Example config.json
-```json
-{
-    "port": 80,
-    "url": "localhost",
-    "protocol": "http://",
-    "fileSizeLimits": 268435456,
-    "webhookurl": "DISCORD WEBHOOK URL",
-    "atlas": {
-        "username": "USERNAME",
-        "password": "PASSWORD",
-        "cluster": "CLUSTER"
-    }
-}
-```
+## TODO
 
----
-
-Example ShareX Image Upload Config
-```json
-{
-  "Version": "13.1.0",
-  "DestinationType": "ImageUploader, TextUploader, FileUploader",
-  "RequestMethod": "POST",
-  "RequestURL": "http://YOURURL/upload",
-  "Body": "MultipartFormData",
-  "Arguments": {
-    "FNL": "FILENAMELENGTHHERE",
-    "key": "YOURKEYHERE"
-  },
-  "FileFormName": "file",
-  "URL": "$json:file.url$",
-  "DeletionURL": "$json:file.delete_url$"
-}
-```
-
----
-
-Example ShareX URL Shortener Config
-```json
-{
-  "Version": "13.1.0",
-  "DestinationType": "URLshortener",
-  "RequestMethod": "POST",
-  "RequestURL": "http(s)://YOURURL/upload",
-  "Body": "MultipartFormData",
-  "Arguments": {
-    "url": "$input$",
-    "key": "YOURKEYHERE"
-  },
-  "URL": "$json:url$",
-}
-```
+1. Add webhooks with discord
+2. Add a index.html correctly so it looks decent

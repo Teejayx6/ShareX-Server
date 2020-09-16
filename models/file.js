@@ -1,11 +1,15 @@
+/*
+    Lol this is a file model
+*/
+
 const mongoose = require("mongoose");
 
 const FileSchema = mongoose.Schema({
-    uploader: String,
-    path: String,
     name: String,
-    UploadedAt: String,
+    path: String,
     views: Number,
+    uploader: String,
+    CreatedAt: String,
     lock: {
         active: Boolean,
         password: String

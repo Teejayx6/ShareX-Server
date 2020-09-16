@@ -1,36 +1,60 @@
-const config = require('../config.json');
-const { Webhook, MessageBuilder } = require('discord-webhook-node');
-const hook = new Webhook(config.webhookurl);
-
-const userModel = require('../models/user.js');
-const fileModel = require('../models/file.js');
-const path = require('path');
 const { unlink } = require('fs');
-module.exports = async (req, res) => {
-    if (!req.query.key) return res.redirect('/');
-    let userData = await userModel.findOne({ key: req.query.key });
-    if (!userData) return res.redirect('/login?message=Incorrect Key');
+const { Router } = require('express');
+const { resolve } = require('path');
 
-    let userLogins = userData.logins;
-    let newUserLogins = userLogins + 1;
-    await userModel.findOneAndUpdate({ key: req.query.key }, { logins: newUserLogins });
+const fileModel = require('../models/file');
+const userModel = require('../models/user');
 
-    let urlArray1 = req.url.split('/');
-    let urlArray = urlArray1[2].split('?')[0];
-    let fileData = await fileModel.findOne({ name: urlArray });
+const router = Router();
 
-    if (!fileData) return res.render('404.ejs', { req: req, res: res });
-    let filePath = path.resolve(`${__dirname}/../${fileData.path}`);
+const morgan = require('morgan');
+const colors = require('colors');
+morgan.token('ip2', function (req, res) { return req.ip.replace('::ffff:', '').replace('::1', 'localhost'); });
+router.use(morgan(`${colors.cyan(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "POST"; } }));
+router.use(morgan(`${colors.green(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "GET"; } }));
 
-    await fileModel.deleteOne({ name: urlArray });
+router.get("/delete/:name", async (req, res) => {
+    let fileName = req.params.name;
+    if (!fileName) return fof(res);
+
+    let fileData = await fileModel.findOne({ name: fileName });
+    if (fileData == null) return fof(res);
+
+    let key = req.query.key;
+    if (!key) return res.status(400).send(JSON.stringify({
+        error: "No key was privided."
+    }));
+
+    let userData = await userModel.findOne({ key: key });
+    if (userData == null) return res.status(400).send(JSON.stringify({
+        error: "An incorrect key was privided."
+    }));
+
+    if (userData.name !== fileData.uploader) return res.status(400).send(JSON.stringify({
+        error: "An incorrect key was privided."
+    }));
+
+    let filePath = resolve(`${__dirname}/../${fileData.path}`);
+    await fileModel.deleteOne({ name: fileData.name });
     unlink(filePath, (err) => {
         if (err) throw err;
     });
 
-    let deleteEmbed = new MessageBuilder()
-        .setTitle("File Deleted")
-        .addField('Deleted By:', userData.name);
-    await hook.send(deleteEmbed);
+    //-------------------------
+    // Add discord webhook
+    //-------------------------
 
-    return res.redirect('/?message=File Successfully Deleted');
+    return res.status(400).send(JSON.stringify({
+        success: true,
+        message: "File was deleted."
+    }));
+});
+
+let fof = (res) => {
+    res.status(404).send(JSON.stringify({
+        error: "File does not exist."
+    }));
+    return;
 };
+
+module.exports = router;

@@ -1,11 +1,24 @@
-const urlModel = require('../models/url.js');
+const { Router } = require('express');
 
-module.exports = async (req, res) => {
-    let number = req.params.number;
-    if (!number) return res.render('404.ejs', {req: req, res: res});
+let URLModel = require('../models/url');
 
-    let urlData = await urlModel.findOne({ id: number });
-    if (!urlData) return res.render('404.ejs', { req: req, res: res });
+const router = Router();
 
-    return res.status(302).redirect(urlData.redirect);
-};
+const morgan = require('morgan');
+const colors = require('colors');
+morgan.token('ip2', function (req, res) { return req.ip.replace('::ffff:', '').replace('::1', 'localhost'); });
+router.use(morgan(`${colors.cyan(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "POST"; } }));
+router.use(morgan(`${colors.green(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "GET"; } }));
+
+router.get("/url/:id", async (req, res) => {
+    let URLID = req.params.id;
+    if (!URLID) return res.send('no');
+
+    let URLData = await URLModel.findOne({ id: URLID });
+    if (URLData == null) return res.send('yes');
+
+    await URLModel.findOneAndUpdate({ id: URLID }, { views: URLData.views + 1 });
+    return res.status(301).redirect(URLData.redirect);
+});
+
+module.exports = router;

@@ -1,120 +1,121 @@
-const config = require('../config.json');
-const { Webhook, MessageBuilder } = require('discord-webhook-node');
-const hook = new Webhook(config.webhookurl);
-
-const userModel = require('../models/user.js');
-const fileModel = require('../models/file.js');
-
-const fs = require('fs');
-const path = require('path');
 const words = require('an-array-of-english-words');
+const config = require('../config.json');
+const { Router } = require('express');
+const { existsSync, mkdirSync } = require('fs');
+const fs = require('fs');
 
-toUpperCaseLetter = function (word) {
-    output = word.charAt(0).toUpperCase() + word.slice(1);
+const userModel = require('../models/user');
+const fileModel = require('../models/file');
+
+const router = Router();
+
+const fileUpload = require('express-fileupload');
+router.use(fileUpload({
+    safeFileNames: true,
+    preserveExtension: true,
+    limits: {
+        fileSize: config.maxFileSize || 9007199254740991
+    }
+}));
+
+const RateLimit = require('express-rate-limit');
+const MongoStore = require('rate-limit-mongo');
+router.use(new RateLimit({
+    store: new MongoStore({
+        uri: config.connectURI || "mongodb://localhost/sharex-server",
+        collectionName: "upload-limiter"
+    }),
+    windowMs: 10 * 60 * 1000,
+    max: 25
+}));
+
+const morgan = require('morgan');
+const colors = require('colors');
+morgan.token('ip2', function (req, res) { return req.ip.replace('::ffff:', '').replace('::1', 'localhost'); });
+router.use(morgan(`${colors.cyan(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "POST"; } }));
+router.use(morgan(`${colors.green(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "GET"; } }));
+
+let toUpperCaseLetter = (word) => {
+    let output = word.charAt(0).toUpperCase() + word.slice(1);
     return output;
 };
 
-module.exports = async (req, res) => {
-    let key = req.body.key;
+let createFileName = (fileExt, loc, FNL) => {
+    let newFileNameArray = [];
+    if (typeof FNL !== 'number') throw new Error('File name length is not a number.');
+
+    for (let i = 0; i < FNL; i++) {
+        let word = toUpperCaseLetter(words.filter(f => f.length < 5)[Math.round(Math.random() * 6972)]);
+        newFileNameArray.push(word);
+    }
+
+    let nFN = newFileNameArray.join('') + '.' + fileExt;
+    let fileLocation = `./uploads/${loc}/${nFN}.${fileExt}`;
+    if (existsSync(fileLocation)) return createFileName(fileExt, loc, FNL);
+    return nFN;
+};
+
+router.post('/api/upload', async (req, res) => {
+    let key = req.headers.key;
     if (!key) return res.status(400).send(JSON.stringify({
-        success: false,
-        error: {
-            message: 'No Key.',
-            fix: 'You need a valid key in order to upload.'
-        }
+        error: "No key was privided in the headers."
     }));
 
     let userData = await userModel.findOne({ key: key });
-
-    if (!userData) return res.status(400).send(JSON.stringify({
-        success: false,
-        error: {
-            message: 'Invalid Key.',
-            fix: 'You need a valid key in order to upload.'
-        }
-    }));
-
-    if (userData.allowed == false) return res.status(400).send(JSON.stringify({
-        success: false,
-        error: {
-            message: 'You are not yet allowed to upload.',
-            fix: 'Wait until you are authorized to upload.'
-        }
+    if (userData == null) return res.status(400).send(JSON.stringify({
+        error: "An incorrect key was privided in the headers."
     }));
 
     if (!req.files.file) return res.status(400).send(JSON.stringify({
-        success: false,
-        error: {
-            message: 'No file was uploaded.',
-            fix: 'Upload a file.'
-        }
+        error: "No file was uplaoded."
     }));
 
-    function createFileName(fileExt) {
-        let newFileNameArray = [];
-        let FNL;
-        if (new Number(req.body.FNL) < 0 || new Number(req.body.FNL) > 63) FNL = 6;
-        else FNL = 6;
+    let FNL = parseInt(req.body.fnl) || 6;
 
-        for (i = 0; i < FNL; i++) {
-            newFileNameArray.push(toUpperCaseLetter(words.filter(f => f.length < 5)[Math.round(Math.random() * 6972)]));
-        }
+    let location = userData.name;
+    let fileName = req.files.file.name.split('.');
+    let fileExt = fileName[fileName.length - 1];
+    let name = createFileName(fileExt, location, FNL);
+    let uploadPath = `uploads/${location}/${name}`;
 
-        nFN = newFileNameArray.join('') + fileExt;
-        let fileLocation = `./uploads/${userData.name}/${nFN}${fileExt}`;
-        if (fs.existsSync(fileLocation)) createFileName(fileExt);
-        else return nFN;
-    };
+    if (!existsSync(`./uploads/${location}`)) mkdirSync(`./uploads/${location}`);
 
-    let file = req.files.file;
-    let fileExtension = path.extname(file.name);
-
-    let newFileName = createFileName(fileExtension);
-    let uploadPath = `uploads/${userData.name}/${newFileName}`;
-
-    let password;
-    if (req.body.password) password = req.body.password;
-    else password = 'none';
-
-    let locked;
-    if (req.body.locked) locked = true;
-    else locked = false;
-
-    file.mv(uploadPath, async (err) => {
+    req.files.file.mv(uploadPath, async (err) => {
         if (err) return res.status(500).send(err);
 
-        fileModel.create({
-            uploader: userData.name,
+        //-------------------------
+        // Add discord webhook
+        //-------------------------
+
+        let lockActive = req.body.locked || false;
+        let lockPassword = req.body.password || 'none';
+
+        await fileModel.create({
+            uploader: location,
             path: uploadPath,
-            name: uploadPath.split('/')[2],
+            name: name,
             UploadedAt: new Date,
             views: 0,
             lock: {
-                active: locked,
-                password: password
+                active: lockActive,
+                password: lockPassword
             }
         });
 
-        let url = config.protocol + config.url + '/files/' + newFileName;
-        let delete_url = config.protocol + config.url + '/delete/' + newFileName + '?key=' + key;
+        let mainURL = config.mainURL || "URL NOT SETUP";
+        let url = mainURL + '/files/' + name;
+        let delete_url = mainURL + '/delete/' + name + '?key=' + key;
 
-        let userUploads = userData.uploads;
-        let newUserUploads = userUploads + 1;
-        await userModel.findOneAndUpdate({ key: key }, { uploads: newUserUploads });
-
-        let uploadEmbed = new MessageBuilder()
-            .setTitle("File Upload")
-            .setURL(url)
-            .addField('Uploaded By:', userData.name);
-        await hook.send(uploadEmbed);
+        await userModel.findOneAndUpdate({ key: key }, { uploads: userData.uploads + 1 });
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({
-            success: true,
             file: {
                 url: url,
                 delete_url: delete_url
             }
         }));
     });
-};
+});
+
+module.exports = router;

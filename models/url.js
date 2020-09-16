@@ -1,15 +1,15 @@
+/*
+    OFC you need to read this to know this is a URL model
+*/
+
 const mongoose = require("mongoose");
 
 const UrlSchema = mongoose.Schema({
+    id: String,
+    views: Number,
     uploader: String,
     redirect: String,
-    id: String,
     CreatedAt: String,
-    views: Number,
-    lock: {
-        active: Boolean,
-        password: String
-    }
 });
 
 module.exports = mongoose.model("url", UrlSchema);

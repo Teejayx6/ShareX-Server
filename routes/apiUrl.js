@@ -1,87 +1,71 @@
 const config = require('../config.json');
-const { Webhook, MessageBuilder } = require('discord-webhook-node');
-const hook = new Webhook(config.webhookurl);
+const { Router } = require('express');
 
-const userModel = require('../models/user.js');
-const urlModel = require('../models/url.js');
+const URLModel = require('../models/url');
+const userModel = require('../models/user');
 
-module.exports = async (req, res) => {
-    let key = req.body.key;
+const router = Router();
+
+const bodyParser = require('body-parser');
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
+const RateLimit = require('express-rate-limit');
+const MongoStore = require('rate-limit-mongo');
+router.use(new RateLimit({
+    store: new MongoStore({
+        uri: config.connectURI || "mongodb://localhost/sharex-server",
+        collectionName: "upload-limiter"
+    }),
+    windowMs: 10 * 60 * 1000,
+    max: 25
+}));
+
+const morgan = require('morgan');
+const colors = require('colors');
+morgan.token('ip2', function (req, res) { return req.ip.replace('::ffff:', '').replace('::1', 'localhost'); });
+router.use(morgan(`${colors.cyan(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "POST"; } }));
+router.use(morgan(`${colors.green(':method')} ${colors.yellow(":ip2")} ${colors.bold(':url')} ${colors.red(":response-time")}`, { skip: function (req, res) { return req.method !== "GET"; } }));
+
+router.post("/api/url", async (req, res) => {
+    let key = req.headers.key;
     if (!key) return res.status(400).send(JSON.stringify({
-        success: false,
-        error: {
-            message: 'No Key.',
-            fix: 'You need a valid key in order to upload.'
-        }
+        error: "No key was privided in the headers."
     }));
 
     let userData = await userModel.findOne({ key: key });
-
-    if (!userData) return res.status(400).send(JSON.stringify({
-        success: false,
-        error: {
-            message: 'Invalid Key.',
-            fix: 'You need a valid key in order to upload.'
-        }
-    }));
-
-    let user = userData.name;
-
-    if (userData.allowed == false) return res.status(400).send(JSON.stringify({
-        success: false,
-        error: {
-            message: 'You are not yet allowed to upload.',
-            fix: 'Wait until you are authorized to upload.'
-        }
+    if (userData == null) return res.status(400).send(JSON.stringify({
+        error: "An incorrect key was privided in the headers."
     }));
 
     let url = req.body.url;
     if (!url) return res.status(400).send(JSON.stringify({
-        success: false,
-        error: {
-            message: 'No url was given.',
-            fix: 'Use a url in body: (url | $input$ ).'
-        }
+        error: "No url provided."
     }));
-
-    async function CreateUrl(length) {
-        // if (typeof length !== Number) throw new Error('length is not a number');
-        let number = Math.floor(Math.random() * (10 ** length)).toString('36');
-        if (await urlModel.findOne({ id: number }))
-            return CreateUrl(length);
-        else return number;
-    }
 
     let redirectNum = await CreateUrl(10);
 
-    await urlModel.create({
-        uploader: user,
-        redirect: url,
+    await URLModel.create({
         id: redirectNum,
-        CreatedAt: new Date,
         views: 0,
-        lock: {
-            active: false,
-            password: "none"
-        }
+        uploader: userData.name,
+        redirect: url,
+        CreatedAt: new Date()
     });
 
-    let redirectUrl = config.protocol + config.url + "/url/" + redirectNum;
-
-    let userRedirects = userData.redirects;
-    let newUserRedirects = userRedirects + 1;
-    await userModel.findOneAndUpdate({ key: key }, { redirects: newUserRedirects });
-
-    let uploadEmbed = new MessageBuilder()
-        .setTitle("URL Redirect Created")
-        .setURL(redirectUrl)
-        .addField('Created By:', userData.name)
-        .addField('Redirects To:', url);
-    await hook.send(uploadEmbed);
-
+    let mainURL = config.mainURL || "URL NOT SETUP";
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
-        success: true,
-        url: redirectUrl
+        url: mainURL + '/url/' + redirectNum
     }));
+});
+
+let CreateUrl = async (length) => {
+    length = parseInt(length);
+    let number = Math.floor(Math.random() * (10 ** length)).toString(36);
+    let urlTest = await URLModel.findOne({ id: number });
+    if (urlTest) return CreateUrl(Numbe(parseInt(length)));
+    return number;
 };
+
+module.exports = router;
