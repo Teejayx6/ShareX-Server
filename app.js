@@ -17,7 +17,7 @@ const express = require('express');
 let app = express();
 app.use(express.static(__dirname + '/public/'));
 router.setup(app);
-app.get('/*', (req, res) => { return res.status(404).send('Error 404'); });
+app.get('/*', (req, res) => { return res.status(302).redirect('/404.html'); });
 
 app.listen(PORT, () => {
     console.log('Starting ShareX Server on port: '.green + PORT.toString().white);
