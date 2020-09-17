@@ -110,7 +110,7 @@ router.post('/api/upload', async (req, res) => {
             }
         }));
 
-        let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+        let ip = req.headers["X-Real-IP"].replace('::ffff:', '').replace('::1', 'localhost');
         console.log(`${'[POST]'.cyan} ${'SAVED FILE'.bgRed.black} ${name.bgBlue.black} ${key.bgYellow.black} ${ip.bgWhite.black}`);
     });
 });
