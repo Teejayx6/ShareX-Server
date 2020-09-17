@@ -18,6 +18,9 @@ router.get("/files/:name", async (req, res) => {
 
     let filePath = resolve(`${__dirname}/../${fileData.path}`);
     sendFile(res, filePath);
+
+    let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+    console.log(`${'[GET]'.green} ${'SENT FILE'.bgMagenta.black} ${fileName.bgGreen.black} ${ip.bgWhite.black}`);
 });
 
 let sendFile = (res, Path) => {

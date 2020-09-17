@@ -12,7 +12,10 @@ router.get("/url/:id", async (req, res) => {
     if (URLData == null) return res.status(302).redirect('/404.html');
 
     await URLModel.findOneAndUpdate({ id: URLID }, { views: URLData.views + 1 });
-    return res.status(302).redirect(URLData.redirect);
+    res.status(302).redirect(URLData.redirect);
+
+    let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+    console.log(`${'[GET]'.green} ${'REDIRECTED'.bgMagenta.black} ${URLData.redirect.bgGreen.black} ${ip.bgWhite.black}`);
 });
 
 module.exports = router;

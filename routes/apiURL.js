@@ -52,6 +52,9 @@ router.post("/api/url", async (req, res) => {
     res.send(JSON.stringify({
         url: mainURL + '/url/' + redirectNum
     }));
+
+    let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+    console.log(`${'[POST]'.cyan} ${'SAVED URL'.bgRed.black} ${url.bgBlue.black} ${key.bgYellow.black} ${ip.bgWhite.black}`);
 });
 
 let CreateUrl = async (length) => {

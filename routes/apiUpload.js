@@ -1,5 +1,6 @@
 const words = require('an-array-of-english-words');
 const config = require('../config.json');
+const colors = require('colors');
 const { Router } = require('express');
 const { existsSync, mkdirSync } = require('fs');
 
@@ -108,6 +109,9 @@ router.post('/api/upload', async (req, res) => {
                 delete_url: delete_url
             }
         }));
+
+        let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+        console.log(`${'[POST]'.cyan} ${'SAVED FILE'.bgRed.black} ${name.bgBlue.black} ${key.bgYellow.black} ${ip.bgWhite.black}`);
     });
 });
 

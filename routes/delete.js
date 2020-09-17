@@ -38,10 +38,13 @@ router.get("/delete/:name", async (req, res) => {
     // Add discord webhook
     //-------------------------
 
-    return res.status(400).send(JSON.stringify({
+    res.status(400).send(JSON.stringify({
         success: true,
         message: "File was deleted."
     }));
+
+    let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+    console.log(`${'[GET]'.green} ${'DELETED FILE'.bgMagenta.black} ${fileData.name.bgGreen.black} ${ip.bgWhite.black}`);
 });
 
 let fof = (res) => {
