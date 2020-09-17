@@ -2,7 +2,6 @@ const words = require('an-array-of-english-words');
 const config = require('../config.json');
 const { Router } = require('express');
 const { existsSync, mkdirSync } = require('fs');
-const fs = require('fs');
 
 const userModel = require('../models/user');
 const fileModel = require('../models/file');
