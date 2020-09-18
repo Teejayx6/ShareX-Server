@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js-light');
+
 const userModel = require('../../models/user');
 
 let createKey = async () => {
@@ -14,11 +15,16 @@ let createKey = async () => {
 let name = 'newuser';
 let aliases = ['newu', 'nu'];
 let run = async (msg, args) => {
-    if (!args[0]) return msg.channel.send('You must include the name of new user.');
+    if (!args[0]) return msg.channel.send(new MessageEmbed()
+        .setTitle(`You must include the name of a new user.`)
+        .setColor('#e9172b'));
     let uName = args[0];
 
     let userCheck = await userModel.findOne({ name: uName });
-    if (userCheck !== null) return msg.channel.send('User already exists.');
+    if (userCheck !== null) return msg.channel.send(new MessageEmbed()
+        .setTitle(`User already exists.`)
+        .setColor('#e9172b'));
+
     let key = (await createKey()).toString();
     await userModel.create({
         key: key,
