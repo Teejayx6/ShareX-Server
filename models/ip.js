@@ -29,10 +29,10 @@ let addIP = async (ip) => {
     if (ipData !== null) return true;
 
     try {
-        await IPModel.create({
-            ip: String,
-            CreatedAt: new Date(),
-        });
+        // await IPModel.create({
+        //     ip: String,
+        //     CreatedAt: new Date(),
+        // });
     } catch (err) {
         console.error(err);
         return false;
