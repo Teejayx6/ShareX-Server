@@ -43,7 +43,7 @@ router.get("/delete/:name", async (req, res) => {
         message: "File was deleted."
     }));
 
-    let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+    let ip = await require('../models/ip').parseIP(req.ip);
     console.log(`${'[GET]'.green} ${'DELETED FILE'.bgMagenta.black} ${fileData.name.bgGreen.black} ${ip.bgWhite.black}`);
 });
 

@@ -53,7 +53,7 @@ router.post("/api/url", async (req, res) => {
         url: mainURL + '/url/' + redirectNum
     }));
 
-    let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+    let ip = await require('../models/ip').parseIP(req.ip);
     console.log(`${'[POST]'.cyan} ${'SAVED URL'.bgRed.black} ${url.bgBlue.black} ${key.bgYellow.black} ${ip.bgWhite.black}`);
 });
 

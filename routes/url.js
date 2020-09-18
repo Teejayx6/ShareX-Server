@@ -14,7 +14,7 @@ router.get("/url/:id", async (req, res) => {
     await URLModel.findOneAndUpdate({ id: URLID }, { views: URLData.views + 1 });
     res.status(302).redirect(URLData.redirect);
 
-    let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+    let ip = await require('../models/ip').parseIP(req.ip);
     console.log(`${'[GET]'.green} ${'REDIRECTED'.bgMagenta.black} ${URLData.redirect.bgGreen.black} ${ip.bgWhite.black}`);
 });
 

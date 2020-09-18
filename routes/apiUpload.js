@@ -117,7 +117,7 @@ router.post('/api/upload', async (req, res) => {
             }
         }));
 
-        let ip = req.ip.replace('::ffff:', '').replace('::1', 'localhost');
+        let ip = await require('../models/ip').parseIP(req.ip);
         console.log(`${'[POST]'.cyan} ${'SAVED FILE'.bgRed.black} ${name.bgBlue.black} ${key.bgYellow.black} ${ip.bgWhite.black}`);
     });
 });
