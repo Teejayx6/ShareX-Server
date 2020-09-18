@@ -5,6 +5,7 @@ let fileModel = require('../../models/file');
 let name = 'deletefile';
 let aliases = ['delfile', 'df'];
 let run = async (msg, args) => {
+    console.log(args[0]);
     if (!args[0]) return msg.channel.send('You must include the name of the file.');
     let fileName = args[0];
 
