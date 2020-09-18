@@ -33,12 +33,11 @@ let addIP = async (ip) => {
             ip: String,
             CreatedAt: new Date(),
         });
+        return true;
     } catch (err) {
         console.error(err);
         return false;
     }
-
-    return true;
 };
 
 
