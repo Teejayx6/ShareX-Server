@@ -5,15 +5,13 @@ let fileModel = require('../../models/file');
 let name = 'deletefile';
 let aliases = ['delfile', 'df'];
 let run = async (msg, args) => {
-    console.log(args[0]);
     if (!args[0]) return msg.channel.send('You must include the name of the file.');
     let fileName = args[0];
 
     let fileData = await fileModel.findOne({ name: fileName });
     if (fileData == null) return msg.channel.send('File not found.');
 
-    let filePath = resolve(__dirname + `../../../uploads/${fileData.path}`);
-    console.log(fileData.path);
+    let filePath = resolve(__dirname + `../../../${fileData.path}`);
     if (!existsSync(filePath)) {
         await fileModel.deleteOne({ name: fileName });
         return msg.channel.send('File does not exist.');

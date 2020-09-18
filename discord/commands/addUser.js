@@ -1,6 +1,6 @@
 const userModel = require('../../models/user');
 
-let createKey = async () => {
+let createKey = () => {
     let p1 = Math.floor(Math.random() * (10 ** 18)).toString(36);
     let p2 = Math.floor(Math.random() * (10 ** 18)).toString(36);
     let p3 = Math.floor(Math.random() * (10 ** 18)).toString(36);
@@ -18,7 +18,7 @@ let run = async (msg, args) => {
 
     let userCheck = await userModel.findOne({ name: uName });
     if (userCheck !== null) return msg.channel.send('User already exists.');
-    let key = createKey().toString();
+    let key = createKey();
     await userModel.create({
         key: key,
         name: uName,

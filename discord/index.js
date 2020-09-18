@@ -1,5 +1,6 @@
 const { Client, Collection } = require('discord.js-light');
 const { readdirSync } = require('fs');
+const colors = require('colors');
 
 let startBot = (userID, token, options) => {
     if (!userID) throw new Error('No user ID provided');
@@ -21,10 +22,13 @@ let startBot = (userID, token, options) => {
             if (msg.author.id !== userID) return;
             let args = msg.content.split(' ').slice(1);
             let cmdName = msg.content.split(' ')[0].slice(1).toLowerCase();
-            let cmd = client.commands.get(cmdName);
-            console.log(cmd);
+            let cmd = client.commands.get(client.cmdAliases.get(cmdName) || cmdName);
             if (cmd == null) return;
             return await cmd.run(msg, args);
+        });
+
+        client.on('ready', () => {
+            console.log('Discord Bot has Started!'.green);
         });
 
         client.login(token);

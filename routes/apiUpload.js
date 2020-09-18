@@ -70,7 +70,11 @@ router.post('/api/upload', async (req, res) => {
     let fileName = req.files.file.name.split('.');
     let fileExt = fileName[fileName.length - 1];
     let name = createFileName(fileExt, location, FNL);
-    let uploadPath = `uploads/${location}/${name}`;
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let uploadPath = `uploads/${location}/${year}/${month}/${day}/${name}`;
 
     if (!existsSync(`./uploads/${location}`)) mkdirSync(`./uploads/${location}`);
 
