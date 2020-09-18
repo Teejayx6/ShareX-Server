@@ -9,7 +9,7 @@ const UrlSchema = mongoose.Schema({
     CreatedAt: String,
 });
 
-let IPModel = mongoose.model("url", UrlSchema);
+let IPModel = mongoose.model("ip", UrlSchema);
 
 //---------------------------------------------
 
