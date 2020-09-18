@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js-light');
 const userModel = require('../../models/user');
 
 let createKey = async () => {
@@ -27,7 +28,12 @@ let run = async (msg, args) => {
         redirects: 0,
     });
 
-    return msg.channel.send(`Created user: \`${uName}\`\nKey: \`${key}\`\nOwner: \`false\``);
+    let embed = new MessageEmbed()
+        .setTitle('Created User')
+        .setThumbnail('https://cdn.discordapp.com/attachments/686689269296922682/755359943242154005/0HL9FFhngVZRSKZ.png')
+        .setDescription(`**Name**: \`${uName}\`\n**Key**: \`${key}\`\n**Owner**: \`false\``)
+        .setColor('#1eda61');
+    return msg.channel.send(embed);
 };
 
 module.exports = { name, aliases, run };

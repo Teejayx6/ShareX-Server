@@ -12,7 +12,10 @@ let run = async (msg, args) => {
     if (userData.owner) return msg.channel.send('You cannot delete a user marked as owner.\nTry demoting them first');
     await userModel.deleteOne({ name: uName });
 
-    return msg.channel.send(`Deleted user: \`${uName}\``);
+    let embed = new MessageEmbed()
+        .setTitle(`Deleted User: \`${uName}\``)
+        .setColor('#e9172b');
+    return msg.channel.send(embed);
 };
 
 module.exports = { name, aliases, run };

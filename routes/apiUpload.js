@@ -95,7 +95,7 @@ router.post('/api/upload', async (req, res) => {
             uploader: location,
             path: uploadPath,
             name: name,
-            UploadedAt: new Date,
+            UploadedAt: new Date(),
             views: 0,
             lock: {
                 active: lockActive,

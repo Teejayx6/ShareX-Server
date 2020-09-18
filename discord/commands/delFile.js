@@ -23,7 +23,11 @@ let run = async (msg, args) => {
         console.error(err);
         return msg.channel.send('An unknown error has occured. Please try again.');
     }
-    return msg.channel.send(`Deleted file: \`${fileName}\``);
+
+    let embed = new MessageEmbed()
+        .setTitle(`Deleted File: \`${fileName}\``)
+        .setColor('#e9172b');
+    return msg.channel.send(embed);
 };
 
 module.exports = { name, aliases, run };
