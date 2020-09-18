@@ -14,7 +14,7 @@ let IPModel = mongoose.model("ip", UrlSchema);
 //---------------------------------------------
 
 let parseIP = async (ip) => {
-    ip = ip.replace('::ffff:', '').replace('::1', 'localhost');
+    ip = ip.replace('::ffff:', '').replace('::1', '127.0.0.1');
     let ipData = await IPModel.findOne({ ip: ip });
     if (ipData == null) return ip;
     return '[IP OMITTED]';
@@ -22,15 +22,14 @@ let parseIP = async (ip) => {
 
 //---------------------------------------------
 
-
 let addIP = async (ip) => {
-    ip = ip.replace('::ffff:', '').replace('::1', 'localhost');
+    ip = ip.replace('::ffff:', '').replace('::1', '127.0.0.1');
     let ipData = await IPModel.findOne({ ip: ip });
     if (ipData !== null) return true;
 
     try {
         await IPModel.create({
-            ip: String,
+            ip: ip,
             CreatedAt: new Date(),
         });
         return true;
@@ -40,5 +39,6 @@ let addIP = async (ip) => {
     }
 };
 
+//---------------------------------------------
 
 module.exports = { parseIP, IPModel, addIP };
