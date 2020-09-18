@@ -24,4 +24,8 @@ app.listen(PORT, () => {
     console.log('Starting ShareX Server on port: '.green + PORT.toString().white);
 });
 
+let discord = require('./discord/index');
+if (config.token && config.userID) { discord.startBot(config.userID, config.token, config.botOptions); }
+else console.log('Starting without a discord bot.'.red);
+
 if (!fs.existsSync('./uploads/')) fs.mkdirSync('./uploads/');

@@ -7,6 +7,7 @@
     "an-array-of-english-words": "^2.0.0",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
+    "discord.js-light": "^3.2.9",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
     "express-rate-limit": "^5.1.3",
