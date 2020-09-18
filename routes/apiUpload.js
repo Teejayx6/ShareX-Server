@@ -2,7 +2,7 @@ const words = require('an-array-of-english-words');
 const config = require('../config.json');
 const colors = require('colors');
 const { Router } = require('express');
-const { existsSync, mkdirSync } = require('fs');
+const { existsSync, mkdirSync, fstat } = require('fs');
 
 const userModel = require('../models/user');
 const fileModel = require('../models/file');
@@ -77,6 +77,9 @@ router.post('/api/upload', async (req, res) => {
     let uploadPath = `uploads/${location}/${year}/${month}/${day}/${name}`;
 
     if (!existsSync(`./uploads/${location}`)) mkdirSync(`./uploads/${location}`);
+    if (!existsSync(`./uploads/${location}/${year}`)) mkdirSync(`./uploads/${location}/${year}`);
+    if (!existsSync(`./uploads/${location}/${year}/${month}`)) mkdirSync(`./uploads/${location}/${year}/${month}`);
+    if (!existsSync(`./uploads/${location}/${year}/${month}/${day}`)) mkdirSync(`./uploads/${location}/${year}/${month}/${day}`);
 
     req.files.file.mv(uploadPath, async (err) => {
         if (err) return res.status(500).send(err);
