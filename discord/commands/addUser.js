@@ -18,7 +18,7 @@ let run = async (msg, args) => {
 
     let userCheck = await userModel.findOne({ name: uName });
     if (userCheck !== null) return msg.channel.send('User already exists.');
-    let key = createKey();
+    let key = createKey().toString();
     await userModel.create({
         key: key,
         name: uName,

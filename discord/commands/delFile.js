@@ -12,6 +12,7 @@ let run = async (msg, args) => {
     if (fileData == null) return msg.channel.send('File not found.');
 
     let filePath = resolve(__dirname + `../../../uploads/${fileData.path}`);
+    console.log(fileData.path);
     if (!existsSync(filePath)) {
         await fileModel.deleteOne({ name: fileName });
         return msg.channel.send('File does not exist.');
