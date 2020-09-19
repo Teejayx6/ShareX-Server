@@ -30,7 +30,9 @@ let startBot = (userID, token, options) => {
             let cmd = client.commands.get(client.cmdAliases.get(cmdName) || cmdName);
             if (cmd == null) return;
             let userData = await userModel.findOne({ discord: msg.author.id });
-            let owner = userData.owner || false;
+            let owner;
+            if (userData == null) owner = false;
+            else owner = userData.owner;
             return await cmd.run(msg, args, owner);
         });
 
