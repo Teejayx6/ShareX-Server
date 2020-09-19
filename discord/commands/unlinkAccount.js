@@ -2,8 +2,8 @@ const { MessageEmbed } = require('discord.js-light');
 
 const userModel = require('../../models/user');
 
-let name = 'linkaccount';
-let aliases = ['la', 'linkacc', 'laccount'];
+let name = 'unlinkaccount';
+let aliases = ['ula', 'unlinkacc', 'ulaccount'];
 let run = async (msg, args, owner) => {
     let userData = await userModel.findOne({ discord: msg.author.id });
     if (userData == null) return msg.channel.send(new MessageEmbed()
