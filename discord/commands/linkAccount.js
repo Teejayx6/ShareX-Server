@@ -19,11 +19,11 @@ let run = async (msg, args, owner) => {
 
     await userModel.findOneAndUpdate({ key: uKey }, { discord: msg.author.id });
 
-    msg.delete();
+    msg.delete().catch();
 
     return msg.channel.send(new MessageEmbed()
         .setTitle('User Updated.')
-        .setDescription(`**User**: \`${userData.name}\`\n**Discord ID**: \`${userData.discord}\`\n`)
+        .setDescription(`**User**: \`${userData.name}\`\n**Discord ID**: \`${msg.author.id}\`\n`)
         .setColor('#e9172b'));
 };
 
