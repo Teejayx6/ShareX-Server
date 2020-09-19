@@ -5,6 +5,11 @@ const userModel = require('../../models/user');
 let name = 'linkaccount';
 let aliases = ['la', 'linkacc', 'laccount'];
 let run = async (msg, args, owner) => {
+    let userCheck = await userModel.findOne({ discord: msg.author.id });
+    if (userCheck !== null) return msg.channel.send(new MessageEmbed()
+        .setTitle('You already have an account linked.')
+        .setColor('#e9172b'));
+
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include a key.`)
         .setColor('#e9172b'));
