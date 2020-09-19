@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js-light');
 
-const userModel = require('../../models/user');
+const userModel = require('../../models/file');
 
 let name = 'fileinfo';
 let aliases = ['fi'];
