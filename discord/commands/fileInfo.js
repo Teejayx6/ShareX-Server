@@ -22,7 +22,7 @@ let run = async (msg, args) => {
 
     return msg.channel.send(new MessageEmbed()
         .setTitle(`File: \`${uName}\``)
-        .setDescription(`**Path**: \`${fileData.path}\`\n**Uploader**: \`${fileData.uploader}\`\n**Views**: \`${fileData.views}\`\n**Date**: \`${fileData.CreatedAt}\`\n`)
+        .setDescription(`**Path**: \`${fileData.path}\`\n**Uploader**: \`${fileData.uploader}\`\n**Views**: \`${fileData.views}\`\n**Date**: \`${fileData.UploadedAt}\`\n`)
         .setColor('#e9172b'));
 };
 

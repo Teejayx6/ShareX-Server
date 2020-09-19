@@ -8,7 +8,7 @@ const FileSchema = mongoose.Schema({
     path: String,
     views: Number,
     uploader: String,
-    CreatedAt: String,
+    UploadedAt: String,
     lock: {
         active: Boolean,
         password: String
