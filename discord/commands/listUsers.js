@@ -7,16 +7,13 @@ let aliases = ['lu', 'ls'];
 let run = async (msg, args) => {
     let data = await userModel.find();
 
-    let dataArray = [];
-
-    data.forEach(e => {
-        dataArray.push(`${e.name}\nUploads: ${e.uploads}\nRedirects: ${e.redirects}`);
-    });
-
     let embed = new MessageEmbed()
         .setTitle("Users")
-        .setDescription(dataArray.join('\n'))
         .setColor('#1eda61');
+
+    data.forEach(e => {
+        embed.addField(e.name, `**Uploads**: ${e.uploads}\n**Redirects**: ${e.redirects}`);
+    });
 
     return msg.channel.send(embed);
 };
