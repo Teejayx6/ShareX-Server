@@ -11,9 +11,13 @@ let run = async (msg, args) => {
         .setTitle("Users")
         .setColor('#1eda61');
 
+    let dataArray = [];
+
     data.forEach(e => {
-        embed.addField(e.name, `**Uploads**: ${e.uploads}\n**Redirects**: ${e.redirects}`);
+        dataArray.push(e.name);
     });
+
+    embed.setDescription(dataArray.join(', '));
 
     return msg.channel.send(embed);
 };
