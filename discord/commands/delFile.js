@@ -12,14 +12,16 @@ let run = async (msg, args) => {
     let fileName = args[0];
 
     let fileData = await fileModel.findOne({ name: fileName });
-    if (fileData == null) return msg.channel.send('File not found.');
+    if (fileData == null) return msg.channel.send(new MessageEmbed()
+        .setTitle('File Not Found.')
+        .setColor('#e9172b'));
 
     let filePath = resolve(__dirname + `../../../${fileData.path}`);
     if (!existsSync(filePath)) {
         await fileModel.deleteOne({ name: fileName });
         return msg.channel.send(new MessageEmbed()
-            .setTitle('File Not Found.'))
-            .setColor('#e9172b');
+            .setTitle('File Not Found.')
+            .setColor('#e9172b'));
     }
     try {
         await fileModel.deleteOne({ name: fileName });
@@ -27,8 +29,8 @@ let run = async (msg, args) => {
     } catch (err) {
         console.error(err);
         return msg.channel.send(new MessageEmbed()
-            .setTitle('An unknown error has occured.\nPlease try again.'))
-            .setColor('#e9172b');
+            .setTitle('An unknown error has occured.\nPlease try again.')
+            .setColor('#e9172b'));
     }
 
     return msg.channel.send(new MessageEmbed()

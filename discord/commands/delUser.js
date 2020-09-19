@@ -14,12 +14,12 @@ let run = async (msg, args) => {
     let userData = await userModel.findOne({ name: uName });
 
     if (userData == null) return msg.channel.send(new MessageEmbed()
-        .setTitle('User does not exist.'))
-        .setColor('#e9172b');
+        .setTitle('User does not exist.')
+        .setColor('#e9172b'));
 
     if (userData.owner) return msg.channel.send(new MessageEmbed()
-        .setTitle('You cannot delete a user marked as owner.\nTry demoting them first.'))
-        .setColor('#e9172b');
+        .setTitle('You cannot delete a user marked as owner.\nTry demoting them first.')
+        .setColor('#e9172b'));
 
     await userModel.deleteOne({ name: uName });
 
