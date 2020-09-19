@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js-light');
 const { existsSync, unlinkSync } = require('fs');
 const { resolve } = require('path');
 
