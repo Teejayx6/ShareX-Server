@@ -27,9 +27,9 @@ Written in around one week so far.
 
 1. Clone the git repo.
 
-2. Create and setup the config.json file
+2. Create and setup the config.json file.
 
-3. Use a process manager such as pm2
+3. Use a process manager such as pm2 to run the server 24/7.
 
 ---
 
