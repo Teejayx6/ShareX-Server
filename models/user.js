@@ -9,6 +9,7 @@ const UserSchema = mongoose.Schema({
     owner: Boolean,
     uploads: Number,
     redirects: Number,
+    discord: String,
 });
 
 module.exports = mongoose.model("users", UserSchema);

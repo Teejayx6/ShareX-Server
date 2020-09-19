@@ -39,6 +39,7 @@ let run = async (msg, args, owner) => {
         owner: false,
         uploads: 0,
         redirects: 0,
+        discord: 'none'
     });
 
     return msg.channel.send(new MessageEmbed()
