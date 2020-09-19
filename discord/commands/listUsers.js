@@ -4,7 +4,11 @@ const userModel = require('../../models/user');
 
 let name = 'listusers';
 let aliases = ['lu', 'ls'];
-let run = async (msg, args) => {
+let run = async (msg, args, owner) => {
+    if (!owner) return msg.channel.send(new MessageEmbed()
+        .setTitle(`You do not have the required permissions to run this command.`)
+        .setColor('#e9172b'));
+
     let data = await userModel.find();
 
     let embed = new MessageEmbed()

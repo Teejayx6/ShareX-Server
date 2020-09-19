@@ -6,10 +6,11 @@ const { existsSync, unlinkSync } = require('fs');
 const { resolve } = require('path');
 
 let fileModel = require('../../models/file');
+let userModel = require('../../models/user');
 
 let name = 'deletefile';
 let aliases = ['delfile', 'df'];
-let run = async (msg, args) => {
+let run = async (msg, args, owner) => {
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include a file name. (Including the file extension)`)
         .setColor('#e9172b'));
@@ -18,6 +19,11 @@ let run = async (msg, args) => {
     let fileData = await fileModel.findOne({ name: fileName });
     if (fileData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('File Not Found.')
+        .setColor('#e9172b'));
+
+    let userData = await userModel.findOne({ discord: msg.author.id });
+    if (userData == null || userData.name !== fileData.uploader) return msg.channel.send(new MessageEmbed()
+        .setTitle('You are not the owner of that file.')
         .setColor('#e9172b'));
 
     let filePath = resolve(__dirname + `../../../${fileData.path}`);

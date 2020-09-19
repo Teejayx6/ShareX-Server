@@ -5,6 +5,8 @@ const { Client, Collection } = require('discord.js-light');
 const { readdirSync } = require('fs');
 const colors = require('colors');
 
+const userModel = require('../models/user');
+
 let startBot = (userID, token, options) => {
     if (!userID) throw new Error('No user ID provided');
     if (!token) throw new Error('No bot token provided');
@@ -22,12 +24,14 @@ let startBot = (userID, token, options) => {
 
         client.on('message', async (msg) => {
             if (!msg.content.startsWith('?')) return;
-            if (msg.author.id !== userID) return;
+            // if (msg.author.id !== userID) return;
             let args = msg.content.split(' ').slice(1);
             let cmdName = msg.content.split(' ')[0].slice(1).toLowerCase();
             let cmd = client.commands.get(client.cmdAliases.get(cmdName) || cmdName);
             if (cmd == null) return;
-            return await cmd.run(msg, args);
+            let userData = await userModel.findOne({ discord: msg.author.id });
+            let owner = userData.owner || false;
+            return await cmd.run(msg, args, owner);
         });
 
         client.on('ready', () => {

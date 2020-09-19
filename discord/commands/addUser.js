@@ -16,7 +16,12 @@ let createKey = async () => {
 
 let name = 'newuser';
 let aliases = ['newu', 'nu'];
-let run = async (msg, args) => {
+let run = async (msg, args, owner) => {
+    if (!owner) return msg.channel.send(new MessageEmbed()
+        .setTitle(`You do not have the required permissions to run this command.`)
+        .setColor('#e9172b'));
+
+
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include the name of a new user.`)
         .setColor('#e9172b'));

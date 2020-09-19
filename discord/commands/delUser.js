@@ -7,7 +7,11 @@ const userModel = require('../../models/user');
 
 let name = 'deluser';
 let aliases = ['delu', 'du'];
-let run = async (msg, args) => {
+let run = async (msg, args, owner) => {
+    if (!owner) return msg.channel.send(new MessageEmbed()
+        .setTitle(`You do not have the required permissions to run this command.`)
+        .setColor('#e9172b'));
+
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include the name of a user.`)
         .setColor('#e9172b'));
