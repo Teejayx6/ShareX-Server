@@ -19,7 +19,7 @@ let run = async (msg, args) => {
 
     return msg.channel.send(new MessageEmbed()
         .setTitle(`User: \`${uName}\``)
-        .setDescription(`Key: \`${userData.key}\`\Owner: \`${userData.owner}\`\Uploads: \`${userData.uploads}\`\Redirects: \`${userData.redirects}\`\n`)
+        .setDescription(`**Key**: \`${userData.key}\`\n**Owner**: \`${userData.owner}\`\n**Uploads**: \`${userData.uploads}\`\n**Redirects**: \`${userData.redirects}\``)
         .setColor('#e9172b'));
 };
 
