@@ -14,7 +14,7 @@ let run = async (msg, args, owner) => {
 
     return msg.channel.send(new MessageEmbed()
         .setTitle('User Updated.')
-        .setDescription(`**User**: \`${userData.name}\`\n**Discord ID**: \`"none"\`\n`)
+        .setDescription(`**User**: \`${userData.name}\`\n**Discord ID**: \`none\`\n`)
         .setColor('#e9172b'));
 };
 
