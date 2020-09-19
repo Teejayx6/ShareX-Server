@@ -1,7 +1,6 @@
 /*
     So people can opt out of getting logged I think
 */
-
 const mongoose = require("mongoose");
 
 const UrlSchema = mongoose.Schema({

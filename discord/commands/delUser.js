@@ -1,3 +1,6 @@
+/*
+    The command to delete users
+*/
 const { MessageEmbed } = require('discord.js-light');
 
 const userModel = require('../../models/user');

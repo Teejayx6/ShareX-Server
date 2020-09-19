@@ -1,3 +1,6 @@
+/* 
+    The router for uploading a file
+*/
 const words = require('an-array-of-english-words');
 const config = require('../config.json');
 const colors = require('colors');

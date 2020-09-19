@@ -1,3 +1,6 @@
+/*
+    The command to get info about a file
+*/
 const { MessageEmbed } = require('discord.js-light');
 
 const userModel = require('../../models/file');

@@ -1,3 +1,6 @@
+/*
+    The discord bot index.js for yes
+*/
 const { Client, Collection } = require('discord.js-light');
 const { readdirSync } = require('fs');
 const colors = require('colors');

@@ -14,7 +14,7 @@ let run = async (msg, args) => {
     let dataArray = [];
 
     data.forEach(e => {
-        dataArray.push(e.name);
+        dataArray.push('**' + e.name + '**');
     });
 
     embed.setDescription(dataArray.join(', '));

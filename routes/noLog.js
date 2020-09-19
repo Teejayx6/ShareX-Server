@@ -1,3 +1,6 @@
+/*
+    The router for not logging an IP
+*/
 const { Router } = require('express');
 const colors = require('colors');
 const ipFunc = require('../models/ip');

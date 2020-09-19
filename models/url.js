@@ -1,7 +1,6 @@
 /*
     OFC you need to read this to know this is a URL model
 */
-
 const mongoose = require("mongoose");
 
 const UrlSchema = mongoose.Schema({

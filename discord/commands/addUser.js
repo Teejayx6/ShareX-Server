@@ -1,3 +1,6 @@
+/*
+    The command used to create a user
+*/
 const { MessageEmbed } = require('discord.js-light');
 
 const userModel = require('../../models/user');

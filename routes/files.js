@@ -1,3 +1,6 @@
+/*
+    The router for getting a file
+*/
 const { Router } = require('express');
 const { resolve } = require('path');
 const { existsSync } = require('fs');

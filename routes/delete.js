@@ -1,3 +1,6 @@
+/*
+    The router for deleting a file
+*/
 const { unlink } = require('fs');
 const { Router } = require('express');
 const { resolve } = require('path');

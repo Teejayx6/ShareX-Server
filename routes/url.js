@@ -1,3 +1,6 @@
+/*
+    The router for redirecting
+*/
 const { Router } = require('express');
 
 let URLModel = require('../models/url');

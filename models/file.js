@@ -1,7 +1,6 @@
 /*
     Lol this is a file model
 */
-
 const mongoose = require("mongoose");
 
 const FileSchema = mongoose.Schema({

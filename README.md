@@ -1,17 +1,87 @@
 # ShareX Server
 
----
-
 ## About
 
-This is a sharex server that I made lol
+This is a ShareX server that I made.
+Written in around one week so far.
+  
+---
 
-gl if u want to host it?
+## Requirements to run
+
+- MongoDB server running
+
+- Domain name or IP pointing to the server
+
+- ShareX or a similar application
 
 ---
 
 ## TODO
 
-1. Add webhooks with discord
-2. Add a index.html correctly so it looks decent
-3. actually fix logging because morgan doesnt want to work
+- Comment my code
+
+---
+
+## Setup
+
+1. Clone the git repo.
+
+2. Create and setup the config.json file
+
+3. Use a process manager such as pm2
+
+---
+
+## Info
+
+### Example config.json
+```json
+{  
+"maxFileSize": 9007199254740991,  
+"connectURI": "mongodb://localhost/sharex",  
+"mainURL": "https://example.com",  
+"token": "[DISCORD BOT TOKEN]",  
+"userID": "277183033344524288"  
+}
+```
+
+### Example ShareX custom uploader
+```js
+{
+  "Version": "13.1.0",
+  "Name": "CUSTOM UPLOADER",
+  "DestinationType": "ImageUploader, TextUploader, FileUploader",
+  "RequestMethod": "POST",
+  "RequestURL": "http://example.com:1234/api/upload",
+  "Headers": {
+    "key": "[KEY CREATED BY DISCORD BOT]"
+  },
+  "Body": "MultipartFormData",
+  "Arguments": {
+    "fnl": "4"
+  },
+  "FileFormName": "file",
+  "URL": "$json:file.url$",
+  "DeletionURL": "$json:file.delete_url$"
+}
+```
+
+### Example ShareX url shortener
+```js
+{
+  "Version": "13.1.0",
+  "Name": "CUSTOM URL SHORTENER",
+  "DestinationType": "URLShortener, URLSharingService",
+  "RequestMethod": "POST",
+  "RequestURL": "http://example.com/api/url",
+  "Headers": {
+    "key": "[KEY CREATED BY DISCORD BOT]"
+  },
+  "Body": "MultipartFormData",
+  "Arguments": {
+    "url": "$input$"
+  },
+  "URL": "$json:url$"
+}
+```

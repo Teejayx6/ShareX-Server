@@ -1,3 +1,6 @@
+/*
+    The router for creating a short url
+*/
 const config = require('../config.json');
 const { Router } = require('express');
 

@@ -1,3 +1,6 @@
+/*
+    Main and setup file for routers
+*/
 const uploadFile = require('./apiUpload');
 const createURL = require('./apiURL');
 const deleteFile = require('./delete');

@@ -1,7 +1,6 @@
 /*
     The user model for mongoose
 */
-
 const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema({
