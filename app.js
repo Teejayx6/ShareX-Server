@@ -20,6 +20,7 @@ const express = require('express');
 let app = express();
 app.set('trust proxy', true);
 app.use(express.static(__dirname + '/public/'));
+app.use(express.static(__dirname + '/uploads/'));
 router.setup(app);
 app.get('/*', (req, res) => { return res.status(302).redirect('/404.html'); });
 

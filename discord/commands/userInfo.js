@@ -5,9 +5,6 @@ const userModel = require('../../models/user');
 let name = 'userinfo';
 let aliases = ['ui'];
 let run = async (msg, args, owner) => {
-    if (!owner) return msg.channel.send(new MessageEmbed()
-        .setTitle(`You do not have the required permissions to run this command.`)
-        .setColor('#e9172b'));
 
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include the name of a user.`)
@@ -21,9 +18,16 @@ let run = async (msg, args, owner) => {
         .setTitle('User does not exist.')
         .setColor('#e9172b'));
 
+    if (!owner) {
+        return msg.channel.send(new MessageEmbed()
+            .setTitle(`User: \`${uName}\``)
+            .setDescription(`**Uploads**: \`${userData.uploads}\`\n**Redirects**: \`${userData.redirects}\``)
+            .setColor('#1eda61'));
+    }
+
     return msg.channel.send(new MessageEmbed()
         .setTitle(`User: \`${uName}\``)
-        .setDescription(`**Key**: \`${userData.key}\`\n**Owner**: \`${userData.owner}\`\n**Uploads**: \`${userData.uploads}\`\n**Redirects**: \`${userData.redirects}\`\n**Discord**: ${userData.discord}`)
+        .setDescription(`**Key**: \`${userData.key}\`\n**Owner**: \`${userData.owner}\`\n**Uploads**: \`${userData.uploads}\`\n**Redirects**: \`${userData.redirects}\``)
         .setColor('#1eda61'));
 };
 
