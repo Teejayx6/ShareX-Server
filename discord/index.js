@@ -26,7 +26,6 @@ let startBot = (userID, token, options) => {
 
         client.on('message', async (msg) => {
             if (!msg.content.startsWith('?')) return;
-            // if (msg.author.id !== userID) return;
             let args = msg.content.split(' ').slice(1);
             let cmdName = msg.content.split(' ')[0].slice(1).toLowerCase();
             let cmd = client.commands.get(client.cmdAliases.get(cmdName) || cmdName);

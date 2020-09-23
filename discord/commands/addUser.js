@@ -21,7 +21,6 @@ let run = async (msg, args, owner) => {
         .setTitle(`You do not have the required permissions to run this command.`)
         .setColor('#e9172b'));
 
-
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include the name of a new user.`)
         .setColor('#e9172b'));
