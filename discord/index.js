@@ -8,8 +8,7 @@ const colors = require('colors');
 const userModel = require('../models/user');
 let defaultOptions = require('./options.json');
 
-let startBot = (userID, token, options) => {
-    if (!userID) throw new Error('No user ID provided');
+let startBot = (token, options) => {
     if (!token) throw new Error('No bot token provided');
     try {
         let clientOptions = Object.assign(defaultOptions, options);

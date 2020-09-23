@@ -43,11 +43,5 @@
         "webhookUpdate",
         "shardConnect",
         "rest"
-    ],
-    "ws": {
-        "intents": [
-            "DIRECT_MESSAGES",
-            "GUILDS"
-        ]
-    }
+    ]
 }
