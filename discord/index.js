@@ -6,12 +6,14 @@ const { readdirSync } = require('fs');
 const colors = require('colors');
 
 const userModel = require('../models/user');
+let defaultOptions = require('./options.json');
 
 let startBot = (userID, token, options) => {
     if (!userID) throw new Error('No user ID provided');
     if (!token) throw new Error('No bot token provided');
     try {
-        let client = new Client(options);
+        let clientOptions = Object.assign(defaultOptions, options);
+        let client = new Client(clientOptions);
         client.commands = new Collection();
         client.cmdAliases = new Collection();
 
