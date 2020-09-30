@@ -38,11 +38,11 @@ Written in around one week so far.
 ### Example config.json
 ```json
 {  
-    "maxFileSize": 9007199254740991,  
-    "connectURI": "mongodb://localhost/sharex",  
-    "mainURL": "https://example.com",  
-    "token": "[DISCORD BOT TOKEN]",  
-    "userID": "277183033344524288"  
+  "maxFileSize": 9007199254740991,  
+  "connectURI": "mongodb://localhost/sharex",  
+  "mainURL": "https://example.com",  
+  "token": "[DISCORD BOT TOKEN]",  
+  "userID": "277183033344524288"  
 }
 ```
 
