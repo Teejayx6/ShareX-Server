@@ -1,8 +1,8 @@
 {
     "restWsBridgeTimeout": 10000,
-	"restTimeOffset": 300,
-	"restRequestTimeout": 20000,
-	"cacheGuilds": false,
+    "restTimeOffset": 300,
+    "restRequestTimeout": 20000,
+    "cacheGuilds": false,
     "cacheChannels": false,
     "cacheOverwrites": false,
     "cacheRoles": false,
