@@ -18,9 +18,13 @@ let run = async (msg, args, owner) => {
     let dataArray = [];
 
     data.forEach(e => {
-        dataArray.push('**' + e.name + '**');
+        dataArray.push('`' + e.name + '`');
     });
-
+	
+	if(dataArray.join(', ').length > 2048) {
+		embed.setDescription('Embed\'s description would exceed 2048 characters.');
+		return msg.channel.send(embed);
+	}
     embed.setDescription(dataArray.join(', '));
 
     return msg.channel.send(embed);
