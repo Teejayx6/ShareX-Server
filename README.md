@@ -47,7 +47,7 @@ Written in around one week so far.
 ```
 
 ### Example ShareX custom uploader
-```js
+```json
 {
   "Version": "13.1.0",
   "Name": "CUSTOM UPLOADER",
@@ -68,7 +68,7 @@ Written in around one week so far.
 ```
 
 ### Example ShareX url shortener
-```js
+```json
 {
   "Version": "13.1.0",
   "Name": "CUSTOM URL SHORTENER",
