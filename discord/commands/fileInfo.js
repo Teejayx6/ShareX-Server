@@ -3,7 +3,7 @@
 */
 const { MessageEmbed } = require('discord.js-light');
 
-const userModel = require('../../models/file');
+const { getFile } = require('../../database/index');
 
 let name = 'fileinfo';
 let aliases = ['fi'];
@@ -16,16 +16,16 @@ let run = async (msg, args, owner) => {
         .setTitle(`You must include the name of a file (Include the file extention).`)
         .setColor('#e9172b'));
 
-    let uName = args[0];
+    let fName = args[0];
 
-    let fileData = await userModel.findOne({ name: uName });
+    let fileData = await getFile(fName);
 
     if (fileData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('File does not exist.')
         .setColor('#e9172b'));
 
     return msg.channel.send(new MessageEmbed()
-        .setTitle(`File: \`${uName}\``)
+        .setTitle(`File: \`${fName}\``)
         .setDescription(`**Path**: \`${fileData.path}\`\n**Uploader**: \`${fileData.uploader}\`\n**Views**: \`${fileData.views}\`\n**Date**: \`${fileData.UploadedAt}\`\n`)
         .setColor('#e9172b'));
 };

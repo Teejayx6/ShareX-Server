@@ -5,7 +5,7 @@ const { Client, Collection } = require('discord.js-light');
 const { readdirSync } = require('fs');
 const colors = require('colors');
 
-const userModel = require('../models/user');
+const { getUserFromDiscord } = require('../database/index');
 let defaultOptions = require('./options.json');
 
 let startBot = (token, options) => {
@@ -29,7 +29,7 @@ let startBot = (token, options) => {
             let cmdName = msg.content.split(' ')[0].slice(1).toLowerCase();
             let cmd = client.commands.get(client.cmdAliases.get(cmdName) || cmdName);
             if (cmd == null) return;
-            let userData = await userModel.findOne({ discord: msg.author.id });
+            let userData = await getUserFromDiscord(msg.author.id);
             let owner;
             if (userData == null) owner = false;
             else owner = userData.owner;

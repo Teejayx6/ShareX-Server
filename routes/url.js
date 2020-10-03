@@ -3,7 +3,8 @@
 */
 const { Router } = require('express');
 
-let URLModel = require('../models/url');
+const { addURLView, getURL } = require('../database/index');
+const { urlGET } = require('../util/logger');
 
 const router = Router();
 
@@ -11,14 +12,13 @@ router.get("/url/:id", async (req, res) => {
     let URLID = req.params.id;
     if (!URLID) return res.status(302).redirect('/404.html');
 
-    let URLData = await URLModel.findOne({ id: URLID });
+    let URLData = await getURL(URLID);
     if (URLData == null) return res.status(302).redirect('/404.html');
 
-    await URLModel.findOneAndUpdate({ id: URLID }, { views: URLData.views + 1 });
+    await addURLView(URLID);
     res.status(302).redirect(URLData.redirect);
 
-    let ip = await require('../models/ip').parseIP(req.ip);
-    console.log(`${'[GET]'.green} ${'REDIRECTED'.bgMagenta.black} ${URLData.redirect.bgGreen.black} ${ip.bgWhite.black}`);
+    urlGET(req.ip, URLData.redirect);
 });
 
 module.exports = router;

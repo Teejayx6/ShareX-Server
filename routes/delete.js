@@ -5,8 +5,8 @@ const { unlink } = require('fs');
 const { Router } = require('express');
 const { resolve } = require('path');
 
-const fileModel = require('../models/file');
-const userModel = require('../models/user');
+const { getUser, getFile, delFile } = require('../database/index');
+const { fileDELETE } = require('../util/logger');
 
 const router = Router();
 
@@ -14,7 +14,7 @@ router.get("/delete/:name", async (req, res) => {
     let fileName = req.params.name;
     if (!fileName) return fof(res);
 
-    let fileData = await fileModel.findOne({ name: fileName });
+    let fileData = await getFile(fileName);
     if (fileData == null) return fof(res);
 
     let key = req.query.key;
@@ -22,7 +22,7 @@ router.get("/delete/:name", async (req, res) => {
         error: "No key was privided."
     }));
 
-    let userData = await userModel.findOne({ key: key });
+    let userData = await getUser(key);
     if (userData == null) return res.status(400).send(JSON.stringify({
         error: "An incorrect key was privided."
     }));
@@ -32,7 +32,7 @@ router.get("/delete/:name", async (req, res) => {
     }));
 
     let filePath = resolve(`${__dirname}/../${fileData.path}`);
-    await fileModel.deleteOne({ name: fileData.name });
+    await delFile(fileData.name);
     unlink(filePath, (err) => {
         if (err) throw err;
     });
@@ -46,8 +46,7 @@ router.get("/delete/:name", async (req, res) => {
         message: "File was deleted."
     }));
 
-    let ip = await require('../models/ip').parseIP(req.ip);
-    console.log(`${'[GET]'.green} ${'DELETED FILE'.bgMagenta.black} ${fileData.name.bgGreen.black} ${ip.bgWhite.black}`);
+    fileDELETE(fileData.name, req.ip, key);
 });
 
 let fof = (res) => {

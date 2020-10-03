@@ -3,7 +3,7 @@
 */
 const { MessageEmbed } = require('discord.js-light');
 
-const userModel = require('../../models/user');
+const { getUserFromName, delUser } = require('../../database/index');
 
 let name = 'deluser';
 let aliases = ['delu', 'du'];
@@ -18,7 +18,7 @@ let run = async (msg, args, owner) => {
 
     let uName = args[0];
 
-    let userData = await userModel.findOne({ name: uName });
+    let userData = await getUserFromName(uName);
 
     if (userData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('User does not exist.')
@@ -28,7 +28,7 @@ let run = async (msg, args, owner) => {
         .setTitle('You cannot delete a user marked as owner.\nTry demoting them first.')
         .setColor('#e9172b'));
 
-    await userModel.deleteOne({ name: uName });
+    await delUser(userData.key);
 
     return msg.channel.send(new MessageEmbed()
         .setTitle(`Deleted User: \`${uName}\``)

@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js-light');
 
-const userModel = require('../../models/user');
+const { getUserFromName } = require('../../database/mongo');
 
 let name = 'userinfo';
 let aliases = ['ui'];
@@ -12,7 +12,7 @@ let run = async (msg, args, owner) => {
 
     let uName = args[0];
 
-    let userData = await userModel.findOne({ name: uName });
+    let userData = await getUserFromName(uName);
 
     if (userData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('User does not exist.')

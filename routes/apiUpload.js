@@ -5,10 +5,10 @@ const words = require('an-array-of-english-words');
 const config = require('../config.json');
 const colors = require('colors');
 const { Router } = require('express');
-const { existsSync, mkdirSync, fstat } = require('fs');
+const { existsSync, mkdirSync } = require('fs');
 
-const userModel = require('../models/user');
-const fileModel = require('../models/file');
+const { getUser, addUserUpload, saveFile } = require('../database/index');
+const { filePOST } = require('../util/logger');
 
 const router = Router();
 
@@ -19,17 +19,6 @@ router.use(fileUpload({
     limits: {
         fileSize: config.maxFileSize || 9007199254740991
     }
-}));
-
-const RateLimit = require('express-rate-limit');
-const MongoStore = require('rate-limit-mongo');
-router.use(new RateLimit({
-    store: new MongoStore({
-        uri: config.connectURI || "mongodb://localhost/sharex-server",
-        collectionName: "upload-limiter"
-    }),
-    windowMs: 10 * 60 * 1000,
-    max: 25
 }));
 
 let toUpperCaseLetter = (word) => {
@@ -58,7 +47,7 @@ router.post('/api/upload', async (req, res) => {
         error: "No key was privided in the headers."
     }));
 
-    let userData = await userModel.findOne({ key: key });
+    let userData = await getUser(key);
     if (userData == null) return res.status(400).send(JSON.stringify({
         error: "An incorrect key was privided in the headers."
     }));
@@ -94,7 +83,7 @@ router.post('/api/upload', async (req, res) => {
         let lockActive = req.body.locked || false;
         let lockPassword = req.body.password || 'none';
 
-        await fileModel.create({
+        await saveFile({
             uploader: location,
             path: uploadPath,
             name: name,
@@ -110,7 +99,7 @@ router.post('/api/upload', async (req, res) => {
         let url = mainURL + '/files/' + name;
         let delete_url = mainURL + '/delete/' + name + '?key=' + key;
 
-        await userModel.findOneAndUpdate({ key: key }, { uploads: userData.uploads + 1 });
+        await addUserUpload(key);
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({
@@ -120,8 +109,7 @@ router.post('/api/upload', async (req, res) => {
             }
         }));
 
-        let ip = await require('../models/ip').parseIP(req.ip);
-        console.log(`${'[POST]'.cyan} ${'SAVED FILE'.bgRed.black} ${name.bgBlue.black} ${key.bgYellow.black} ${ip.bgWhite.black}`);
+        filePOST(name, req.ip, key);
     });
 });
 

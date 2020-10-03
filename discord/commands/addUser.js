@@ -3,13 +3,13 @@
 */
 const { MessageEmbed } = require('discord.js-light');
 
-const userModel = require('../../models/user');
+const { saveUser, getUser } = require('../../database/index');
 
 let createKey = async () => {
     let string = Math.floor(Math.random() * (10 ** 18)).toString(36) +
         Math.floor(Math.random() * (10 ** 18)).toString(36) +
         Math.floor(Math.random() * (10 ** 18)).toString(36);
-    let urlTest = await userModel.findOne({ key: string });
+    let urlTest = await getUser(string);
     if (urlTest !== null) return await CreateUrl();
     return string;
 };
@@ -26,13 +26,13 @@ let run = async (msg, args, owner) => {
         .setColor('#e9172b'));
     let uName = args[0];
 
-    let userCheck = await userModel.findOne({ name: uName });
+    let userCheck = await getUser(args[0]);
     if (userCheck !== null) return msg.channel.send(new MessageEmbed()
         .setTitle(`User already exists.`)
         .setColor('#e9172b'));
 
     let key = (await createKey()).toString();
-    await userModel.create({
+    await saveUser({
         key: key,
         name: uName,
         owner: false,

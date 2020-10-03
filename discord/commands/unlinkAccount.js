@@ -1,16 +1,16 @@
 const { MessageEmbed } = require('discord.js-light');
 
-const userModel = require('../../models/user');
+const { getUserFromDiscord, setDiscord } = require('../../database/mongo');
 
 let name = 'unlinkaccount';
 let aliases = ['ula', 'unlinkacc', 'ulaccount'];
 let run = async (msg, args, owner) => {
-    let userData = await userModel.findOne({ discord: msg.author.id });
+    let userData = await getUserFromDiscord(msg.author.id);
     if (userData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('You do no have an account linked.')
         .setColor('#e9172b'));
 
-    await userModel.updateOne({ discord: msg.author.id }, { discord: "none" });
+    await setDiscord(userData.key, "none");
 
     return msg.channel.send(new MessageEmbed()
         .setTitle('User Updated.')

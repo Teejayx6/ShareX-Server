@@ -1,11 +1,11 @@
 const { MessageEmbed } = require('discord.js-light');
 
-const userModel = require('../../models/user');
+const { getUser, setDiscord, getUserFromDiscord } = require('../../database/index');
 
 let name = 'linkaccount';
 let aliases = ['la', 'linkacc', 'laccount'];
 let run = async (msg, args, owner) => {
-    let userCheck = await userModel.findOne({ discord: msg.author.id });
+    let userCheck = await getUserFromDiscord(msg.author.id);
     if (userCheck !== null) return msg.channel.send(new MessageEmbed()
         .setTitle('You already have an account linked.')
         .setColor('#e9172b'));
@@ -16,13 +16,13 @@ let run = async (msg, args, owner) => {
 
     let uKey = args[0];
 
-    let userData = await userModel.findOne({ key: uKey });
+    let userData = await getUser(uKey);
 
     if (userData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('User does not exist.')
         .setColor('#e9172b'));
 
-    await userModel.findOneAndUpdate({ key: uKey }, { discord: msg.author.id });
+    await setDiscord(uKey, msg.author.id);
 
     msg.delete().catch();
 

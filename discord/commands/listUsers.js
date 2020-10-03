@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js-light');
 
-const userModel = require('../../models/user');
+const { getAllUsers } = require('../../database/index');
 
 let name = 'listusers';
 let aliases = ['lu', 'ls'];
@@ -9,7 +9,7 @@ let run = async (msg, args, owner) => {
         .setTitle(`You do not have the required permissions to run this command.`)
         .setColor('#e9172b'));
 
-    let data = await userModel.find();
+    let data = await getAllUsers();
 
     let embed = new MessageEmbed()
         .setTitle("Users")

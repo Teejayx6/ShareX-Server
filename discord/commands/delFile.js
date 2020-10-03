@@ -5,8 +5,7 @@ const { MessageEmbed } = require('discord.js-light');
 const { existsSync, unlinkSync } = require('fs');
 const { resolve } = require('path');
 
-let fileModel = require('../../models/file');
-let userModel = require('../../models/user');
+const { getFile, delFile, getUserFromDiscord } = require('../../database/index');
 
 let name = 'deletefile';
 let aliases = ['delfile', 'df'];
@@ -16,25 +15,25 @@ let run = async (msg, args, owner) => {
         .setColor('#e9172b'));
     let fileName = args[0];
 
-    let fileData = await fileModel.findOne({ name: fileName });
+    let fileData = await getFile(fileName);
     if (fileData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('File Not Found.')
         .setColor('#e9172b'));
 
-    let userData = await userModel.findOne({ discord: msg.author.id });
+    let userData = await getUserFromDiscord(msg.author.id);
     if (userData == null || userData.name !== fileData.uploader) return msg.channel.send(new MessageEmbed()
         .setTitle('You are not the owner of that file.')
         .setColor('#e9172b'));
 
     let filePath = resolve(__dirname + `../../../${fileData.path}`);
     if (!existsSync(filePath)) {
-        await fileModel.deleteOne({ name: fileName });
+        await delFile(fileName);
         return msg.channel.send(new MessageEmbed()
             .setTitle('File Not Found.')
             .setColor('#e9172b'));
     }
     try {
-        await fileModel.deleteOne({ name: fileName });
+        await delFile(fileName);
         unlinkSync(filePath);
     } catch (err) {
         console.error(err);

@@ -5,25 +5,24 @@ const { Router } = require('express');
 const { resolve } = require('path');
 const { existsSync } = require('fs');
 
-const router = Router();
+const { getFile, addFileView } = require('../database/index');
+const { fileGET } = require('../util/logger');
 
-let fileModel = require('../models/file');
-let fofFilePath = resolve(`${__dirname}/../public/404.png`);
+const router = Router();
 
 router.get("/files/:name", async (req, res) => {
     let fileName = req.params.name;
     if (!fileName) return fof(res);
 
-    let fileData = await fileModel.findOne({ name: fileName });
+    let fileData = await getFile(fileName);
     if (fileData == null) return fof(res);
 
-    await fileModel.findOneAndUpdate({ name: fileName }, { views: fileData.views + 1 });
+    await addFileView(fileName);
 
     let filePath = resolve(`${__dirname}/../${fileData.path}`);
     sendFile(res, filePath);
 
-    let ip = await require('../models/ip').parseIP(req.ip);
-    console.log(`${'[GET]'.green} ${'SENT FILE'.bgMagenta.black} ${fileName.bgGreen.black} ${ip.bgWhite.black}`);
+    fileGET(fileName, req.ip);
 });
 
 let sendFile = (res, Path) => {
