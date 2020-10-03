@@ -9,7 +9,7 @@ Written in around one week so far.
 
 ## Requirements to run
 
-- MongoDB server running
+- A DB properly configured
 
 - Domain name or IP pointing to the server
 
@@ -85,3 +85,7 @@ Written in around one week so far.
   "URL": "$json:url$"
 }
 ```
+
+### Contributors
+
+- [Roki](https://github.com/Roki100)
