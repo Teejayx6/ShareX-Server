@@ -96,7 +96,7 @@ module.exports.getURL = async (ID) => {
   return URLData;
 };
 
-module.exports.saveURL = async () => {
+module.exports.saveURL = async (data) => {
   let URLData = await URLModel.create(data);
   return URLData;
 };

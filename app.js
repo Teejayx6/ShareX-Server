@@ -25,7 +25,8 @@ const discord = require('./discord/index');
 if (config.token) { discord.startBot(config.token, config.botOptions); }
 else console.log('Starting without a discord bot.'.red);
 
-const fs = require('fs');
 const database = require('./database');
 database.init();
+
+const fs = require('fs');
 if (!fs.existsSync('./uploads/')) fs.mkdirSync('./uploads/');
