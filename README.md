@@ -3,7 +3,7 @@
 ## About
 
 This is a ShareX server that I made.
-Written in around one week so far.
+Written in around seven weeks so far.
   
 ---
 
@@ -21,21 +21,26 @@ Written in around one week so far.
 
 - Comment my code
 
+- frontend
+
 ---
 
 ## Setup
 
 1. Clone the git repo.
 
-2. Create and setup the config.json file.
+2. cd to src directory
 
-3. Use a process manager such as pm2 to run the server 24/7.
+3. Create and setup the config.json file.
+
+4. Use a process manager such as pm2 to run the server 24/7.
 
 ---
 
 ## Info
 
 ### Example config.json
+
 ```json
 {  
   "maxFileSize": 9007199254740991,  
@@ -57,7 +62,7 @@ Written in around one week so far.
   "Name": "CUSTOM UPLOADER",
   "DestinationType": "ImageUploader, TextUploader, FileUploader",
   "RequestMethod": "POST",
-  "RequestURL": "http://example.com:1234/api/upload",
+  "RequestURL": "https://example.com/api/upload",
   "Headers": {
     "key": "[KEY CREATED BY DISCORD BOT]"
   },
@@ -78,7 +83,7 @@ Written in around one week so far.
   "Name": "CUSTOM URL SHORTENER",
   "DestinationType": "URLShortener, URLSharingService",
   "RequestMethod": "POST",
-  "RequestURL": "http://example.com/api/url",
+  "RequestURL": "https://example.com/api/url",
   "Headers": {
     "key": "[KEY CREATED BY DISCORD BOT]"
   },
