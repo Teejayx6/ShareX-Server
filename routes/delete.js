@@ -37,10 +37,6 @@ router.get("/delete/:name", async (req, res) => {
         if (err) throw err;
     });
 
-    //-------------------------
-    // Add discord webhook
-    //-------------------------
-
     res.status(400).send(JSON.stringify({
         success: true,
         message: "File was deleted."

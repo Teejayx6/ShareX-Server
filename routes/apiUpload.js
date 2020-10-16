@@ -1,9 +1,11 @@
 /* 
     The router for uploading a file
 */
-const words = require('an-array-of-english-words');
 const config = require('../config.json');
+
+const words = require('../util/words.json');
 const colors = require('colors');
+
 const { Router } = require('express');
 const { existsSync, mkdirSync } = require('fs');
 
