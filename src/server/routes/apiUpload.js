@@ -1,16 +1,16 @@
 /* 
     The router for uploading a file
 */
-const config = require('../config.json');
+const config = require('../../config.json');
 
-const words = require('../util/words.json');
+const words = require('../../util/words.json');
 const colors = require('colors');
 
 const { Router } = require('express');
 const { existsSync, mkdirSync } = require('fs');
 
-const { getUser, addUserUpload, saveFile } = require('../database/index');
-const { filePOST } = require('../util/logger');
+const { getUser, addUserUpload, saveFile } = require('../../database/index');
+const { filePOST } = require('../../util/logger');
 
 const router = Router();
 
@@ -77,10 +77,6 @@ router.post('/api/upload', async (req, res) => {
 
     req.files.file.mv(uploadPath, async (err) => {
         if (err) return res.status(500).send(err);
-
-        //-------------------------
-        // Add discord webhook
-        //-------------------------
 
         let lockActive = req.body.locked || false;
         let lockPassword = req.body.password || 'none';

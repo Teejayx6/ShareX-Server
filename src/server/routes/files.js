@@ -5,8 +5,8 @@ const { Router } = require('express');
 const { resolve } = require('path');
 const { existsSync } = require('fs');
 
-const { getFile, addFileView } = require('../database/index');
-const { fileGET } = require('../util/logger');
+const { getFile, addFileView } = require('../../database/index');
+const { fileGET } = require('../../util/logger');
 
 const router = Router();
 
@@ -19,7 +19,7 @@ router.get("/files/:name", async (req, res) => {
 
     await addFileView(fileName);
 
-    let filePath = resolve(`${__dirname}/../${fileData.path}`);
+    let filePath = resolve(`${__dirname}/../../../${fileData.path}`);
     sendFile(res, filePath);
 
     fileGET(fileName, req.ip);

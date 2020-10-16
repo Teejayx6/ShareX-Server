@@ -1,12 +1,12 @@
 /*
     The router for creating a short url
 */
-const config = require('../config.json');
+const config = require('../../config.json');
 
 const { Router } = require('express');
 
-const { saveURL, getURL, getUser } = require('../database/index');
-const { urlPOST } = require('../util/logger');
+const { saveURL, getURL, getUser } = require('../../database/index');
+const { urlPOST } = require('../../util/logger');
 
 const router = Router();
 

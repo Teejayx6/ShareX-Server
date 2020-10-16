@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js-light');
 
-const { getUserFromDiscord, setDiscord } = require('../../database/mongo');
+const { getUserFromDiscord, setDiscord } = require('../../database/index');
 
 let name = 'unlinkaccount';
 let aliases = ['ula', 'unlinkacc', 'ulaccount'];

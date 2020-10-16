@@ -3,6 +3,8 @@
 */
 const { Client, Collection } = require('discord.js-light');
 const { readdirSync } = require('fs');
+const { resolve } = require('path');
+
 const colors = require('colors');
 
 const { getUserFromDiscord } = require('../database/index');
@@ -16,7 +18,7 @@ let startBot = (token, options) => {
         client.commands = new Collection();
         client.cmdAliases = new Collection();
 
-        let files = readdirSync('./discord/commands').filter(f => f.endsWith('.js'));
+        let files = readdirSync(resolve(__dirname + '/commands/')).filter(f => f.endsWith('.js'));
         for (const file of files) {
             let command = require(`./commands/${file}`);
             client.commands.set(command.name, command);

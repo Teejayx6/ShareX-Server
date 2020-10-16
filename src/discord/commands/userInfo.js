@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js-light');
 
-const { getUserFromName } = require('../../database/mongo');
+const { getUserFromName } = require('../../database/index');
 
 let name = 'userinfo';
 let aliases = ['ui'];

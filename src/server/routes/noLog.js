@@ -3,7 +3,7 @@
 */
 const { Router } = require('express');
 
-const { saveIP } = require('../database/index');
+const { saveIP } = require('../../database/index');
 
 const router = Router();
 

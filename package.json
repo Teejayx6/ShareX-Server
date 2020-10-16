@@ -1,8 +1,8 @@
 {
-  "name": "sharex-server-two",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "sharex-server",
+  "version": "1.0.1",
+  "description": "This is a ShareX server that I made.\r Written in around seven weeks so far.",
+  "main": "./src/sharex.js",
   "dependencies": {
     "an-array-of-english-words": "^2.0.0",
     "body-parser": "^1.19.0",
@@ -13,10 +13,24 @@
     "mongoose": "^5.10.5",
     "path": "^0.12.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "2.0.4"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon .",
+    "start": "node ."
   },
   "author": "Million900o",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Million900o/ShareX-Server.git"
+  },
+  "keywords": [
+    "sharex"
+  ],
+  "bugs": {
+    "url": "https://github.com/Million900o/ShareX-Server/issues"
+  },
+  "homepage": "https://github.com/Million900o/ShareX-Server#readme"
 }

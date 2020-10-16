@@ -5,7 +5,7 @@ const uploadFile = require('./apiUpload');
 const createURL = require('./apiURL');
 const deleteFile = require('./delete');
 const getFile = require('./files');
-const URL = require('./URL');
+const URL = require('./url');
 const noLog = require('./noLog');
 
 let setup = (app) => {

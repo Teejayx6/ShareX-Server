@@ -5,8 +5,8 @@ const { unlink } = require('fs');
 const { Router } = require('express');
 const { resolve } = require('path');
 
-const { getUser, getFile, delFile } = require('../database/index');
-const { fileDELETE } = require('../util/logger');
+const { getUser, getFile, delFile } = require('../../database/index');
+const { fileDELETE } = require('../../util/logger');
 
 const router = Router();
 
@@ -31,7 +31,7 @@ router.get("/delete/:name", async (req, res) => {
         error: "An incorrect key was privided."
     }));
 
-    let filePath = resolve(`${__dirname}/../${fileData.path}`);
+    let filePath = resolve(`${__dirname}/../../../${fileData.path}`);
     await delFile(fileData.name);
     unlink(filePath, (err) => {
         if (err) throw err;

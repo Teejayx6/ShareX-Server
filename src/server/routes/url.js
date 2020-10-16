@@ -3,8 +3,8 @@
 */
 const { Router } = require('express');
 
-const { addURLView, getURL } = require('../database/index');
-const { urlGET } = require('../util/logger');
+const { addURLView, getURL } = require('../../database/index');
+const { urlGET } = require('../../util/logger');
 
 const router = Router();
 
