@@ -117,6 +117,8 @@ const UserSchema = mongoose.Schema({
   uploads: Number,
   redirects: Number,
   discord: String,
+  id: String,
+  CreatedAt: String
 });
 
 let UserModel = mongoose.model('users', UserSchema);

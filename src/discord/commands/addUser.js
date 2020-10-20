@@ -38,7 +38,9 @@ let run = async (msg, args, owner) => {
         owner: false,
         uploads: 0,
         redirects: 0,
-        discord: 'none'
+        discord: 'none',
+        CreatedAt: new Date(),
+        id: Math.floor(Date.now() / 1000).toString()
     });
 
     return msg.channel.send(new MessageEmbed()
