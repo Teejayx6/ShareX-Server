@@ -16,7 +16,7 @@ let run = async (msg, args, owner) => {
 
     let uKey = args[0];
 
-    let userData = await getUser(uKey);
+    let userData = await getUserFromKey(uKey);
 
     if (userData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('User does not exist.')

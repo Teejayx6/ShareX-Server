@@ -9,7 +9,7 @@ let createKey = async () => {
     let string = Math.floor(Math.random() * (10 ** 18)).toString(36) +
         Math.floor(Math.random() * (10 ** 18)).toString(36) +
         Math.floor(Math.random() * (10 ** 18)).toString(36);
-    let urlTest = await getUser(string);
+    let urlTest = await getUserFromKey(string);
     if (urlTest !== null) return await CreateUrl();
     return string;
 };
@@ -26,7 +26,7 @@ let run = async (msg, args, owner) => {
         .setColor('#e9172b'));
     let uName = args[0];
 
-    let userCheck = await getUser(args[0]);
+    let userCheck = await getUserFromKey(args[0]);
     if (userCheck !== null) return msg.channel.send(new MessageEmbed()
         .setTitle(`User already exists.`)
         .setColor('#e9172b'));

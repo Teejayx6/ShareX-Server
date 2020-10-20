@@ -22,7 +22,7 @@ router.get("/delete/:name", async (req, res) => {
         error: "No key was privided."
     }));
 
-    let userData = await getUser(key);
+    let userData = await getUserFromKey(key);
     if (userData == null) return res.status(400).send(JSON.stringify({
         error: "An incorrect key was privided."
     }));

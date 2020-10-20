@@ -49,7 +49,7 @@ router.post('/api/upload', async (req, res) => {
         error: "No key was privided in the headers."
     }));
 
-    let userData = await getUser(key);
+    let userData = await getUserFromKey(key);
     if (userData == null) return res.status(400).send(JSON.stringify({
         error: "An incorrect key was privided in the headers."
     }));

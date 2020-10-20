@@ -124,27 +124,27 @@ const UserSchema = mongoose.Schema({
 let UserModel = mongoose.model('users', UserSchema);
 
 module.exports.addUserUpload = async (key) => {
-  let userData = await this.getUser(key);
+  let userData = await this.getUserFromKey(key);
   if (!userData) return null;
   await UserModel.updateOne(userData, { uploads: userData.uploads++ });
   return true;
 };
 
 module.exports.addUserRedirect = async (key) => {
-  let userData = await this.getUser(key);
+  let userData = await this.getUserFromKey(key);
   if (!userData) return null;
   await UserModel.updateOne(userData, { redirect: userData.redirect++ });
   return true;
 };
 
 module.exports.setDiscord = async (key, discord) => {
-  let userData = await this.getUser(key);
+  let userData = await this.getUserFromKey(key);
   if (!userData) return null;
   await UserModel.updateOne(userData, { discord: discord });
   return true;
 };
 
-module.exports.getUser = async (key) => {
+module.exports.getUserFromKey = async (key) => {
   let userData = await UserModel.findOne({ key: key });
   return userData;
 };
@@ -170,7 +170,7 @@ module.exports.saveUser = async (data) => {
 };
 
 module.exports.delUser = async (key) => {
-  let userData = await this.getUser(key);
+  let userData = await this.getUserFromKey(key);
   if (!userData) return false;
   UserModel.deleteOne(userData);
   return true;
