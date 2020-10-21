@@ -1,16 +1,16 @@
 /* 
     The router for uploading a file
 */
-const config = require('../../config.json');
+const config = require('../../../config.json');
 
-const words = require('../../util/words.json');
+const words = require('../../../util/words.json');
 const colors = require('colors');
 
 const { Router } = require('express');
 const { existsSync, mkdirSync } = require('fs');
 
-const { getUserFromKey, addUserUpload, saveFile } = require('../../database/index');
-const { filePOST } = require('../../util/logger');
+const { getUserFromKey, addUserUpload, saveFile } = require('../../../database/index');
+const { filePOST } = require('../../../util/logger');
 
 const router = Router();
 
@@ -45,18 +45,18 @@ let createFileName = (fileExt, loc, FNL) => {
 
 router.post('/api/upload', async (req, res) => {
     let key = req.headers.key;
-    if (!key) return res.status(400).send(JSON.stringify({
-        error: "No key was privided in the headers."
-    }));
+    if (!key) return res.status(400).json({
+        "error": "No key was privided in the headers."
+    });
 
     let userData = await getUserFromKey(key);
-    if (userData == null) return res.status(400).send(JSON.stringify({
-        error: "An incorrect key was privided in the headers."
-    }));
+    if (userData == null) return res.status(400).json({
+        "error": "An incorrect key was privided in the headers."
+    });
 
-    if (!req.files.file) return res.status(400).send(JSON.stringify({
-        error: "No file was uplaoded."
-    }));
+    if (!req.files || !req.files.file) return res.status(400).json({
+        "error": "No file was uploaded."
+    });
 
     let FNL = parseInt(req.body.fnl) || 6;
 
@@ -100,12 +100,12 @@ router.post('/api/upload', async (req, res) => {
         await addUserUpload(key);
 
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({
+        res.json({
             file: {
                 url: url,
                 delete_url: delete_url
             }
-        }));
+        });
 
         filePOST(name, req.ip, key);
     });

@@ -15,8 +15,7 @@ module.exports.start = () => {
     app.use(express.static(__dirname + '/public/'));
     app.use(express.static(__dirname + '/uploads/'));
 
-    const router = require('./routes');
-    router.setup(app);
+    require('./routes').setup(app);
 
     app.get('/*', (req, res) => { return res.status(302).redirect('/404.html'); });
 

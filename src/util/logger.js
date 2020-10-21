@@ -14,9 +14,21 @@ module.exports.urlPOST = async (url, ip, key) => {
   console.log(msg);
 };
 
+module.exports.urlAPIGET = async (id, ip) => {
+  ip = await parseIP(ip);
+  let msg = `${'[GET]'.green} ${'SENT URL DATA'.bgMagenta.black} ${id.toString().bgBlue.black} ${ip.toString().bgWhite.black}`;
+  console.log(msg);
+};
+
 module.exports.filePOST = async (name, ip, key) => {
   ip = await parseIP(ip);
   let msg = `${'[POST]'.cyan} ${'SAVED FILE'.bgRed.black} ${name.toString().bgBlue.black} ${key.toString().bgYellow.black} ${ip.toString().bgWhite.black}`;
+  console.log(msg);
+};
+
+module.exports.fileAPIGET = async (name, ip) => {
+  ip = await parseIP(ip);
+  let msg = `${'[GET]'.green} ${'SENT FILE DATA'.bgMagenta.black} ${name.toString().bgBlue.black} ${ip.toString().bgWhite.black}`;
   console.log(msg);
 };
 

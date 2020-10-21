@@ -12,24 +12,28 @@ const router = Router();
 
 router.get("/delete/:name", async (req, res) => {
     let fileName = req.params.name;
-    if (!fileName) return fof(res);
+    if (!fileName) return res.status(200).json({
+        "error": "File does not exist."
+    });
 
     let fileData = await getFile(fileName);
-    if (fileData == null) return fof(res);
+    if (fileData == null) return res.status(404).json({
+        "error": "File does not exist."
+    });
 
     let key = req.query.key;
-    if (!key) return res.status(400).send(JSON.stringify({
-        error: "No key was privided."
-    }));
+    if (!key) return res.status(400).json({
+        "error": "No key was privided."
+    });
 
     let userData = await getUserFromKey(key);
-    if (userData == null) return res.status(400).send(JSON.stringify({
-        error: "An incorrect key was privided."
-    }));
+    if (userData == null) return res.status(400).json({
+        "error": "An incorrect key was privided."
+    });
 
-    if (userData.name !== fileData.uploader) return res.status(400).send(JSON.stringify({
-        error: "An incorrect key was privided."
-    }));
+    if (userData.name !== fileData.uploader) return res.status(400).json({
+        "error": "An incorrect key was privided."
+    });
 
     let filePath = resolve(`${__dirname}/../../../${fileData.path}`);
     await delFile(fileData.name);
@@ -37,19 +41,12 @@ router.get("/delete/:name", async (req, res) => {
         if (err) throw err;
     });
 
-    res.status(400).send(JSON.stringify({
-        success: true,
-        message: "File was deleted."
-    }));
+    res.status(400).json({
+        "success": true,
+        "message": "File was deleted."
+    });
 
     fileDELETE(fileData.name, req.ip, key);
 });
-
-let fof = (res) => {
-    res.status(404).send(JSON.stringify({
-        error: "File does not exist."
-    }));
-    return;
-};
 
 module.exports = router;

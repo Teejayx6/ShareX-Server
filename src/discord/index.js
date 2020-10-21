@@ -48,7 +48,7 @@ let startBot = () => {
             console.log('Discord Bot has Started!'.green);
         });
 
-        client.login(token);
+        client.login(config.token);
     } catch (err) {
         return console.log(err);
     }

@@ -139,7 +139,6 @@ module.exports.saveUser = async (data) => {
 };
 
 module.exports.delUser = async (key) => {
-  require('crypto').createHash('sha');
   let userData = await this.getUserFromKey(key);
   if (!userData) return false;
   await UserModel.deleteOne(userData);

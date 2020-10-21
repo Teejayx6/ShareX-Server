@@ -12,28 +12,18 @@ const router = Router();
 
 router.get("/files/:name", async (req, res) => {
     let fileName = req.params.name;
-    if (!fileName) return fof(res);
+    if (!fileName) return res.status(203).redirect('/404.html');
 
     let fileData = await getFile(fileName);
-    if (fileData == null) return fof(res);
+    if (fileData == null) return res.status(203).redirect('/404.html');
 
     await addFileView(fileName);
 
     let filePath = resolve(`${__dirname}/../../../${fileData.path}`);
-    sendFile(res, filePath);
+    if (!existsSync(filePath)) return res.status(203).redirect('/404.html');
+    res.sendFile(filePath);
 
     fileGET(fileName, req.ip);
 });
-
-let sendFile = (res, Path) => {
-    let filePath = resolve(Path);
-    if (!existsSync(filePath)) return fof(res);
-    res.sendFile(filePath);
-};
-
-let fof = (res) => {
-    res.status(203).redirect('/404.html');
-    return;
-};
 
 module.exports = router;
