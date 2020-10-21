@@ -9,6 +9,7 @@ const { getFile, delFile, getUserFromDiscord } = require('../../database/index')
 
 let name = 'deletefile';
 let aliases = ['delfile', 'df'];
+let permissions = 4;
 let run = async (msg, args, owner) => {
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include a file name. (Including the file extension)`)
@@ -47,4 +48,4 @@ let run = async (msg, args, owner) => {
         .setColor('#e9172b'));
 };
 
-module.exports = { name, aliases, run };
+module.exports = { name, aliases, run, permissions };

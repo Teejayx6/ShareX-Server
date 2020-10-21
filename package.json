@@ -4,7 +4,6 @@
   "description": "This is a ShareX server that I made.\r Written in around seven weeks so far.",
   "main": "./src/sharex.js",
   "dependencies": {
-    "an-array-of-english-words": "^2.0.0",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
     "discord.js-light": "^3.2.9",

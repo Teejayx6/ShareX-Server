@@ -1,9 +1,10 @@
 const { MessageEmbed } = require('discord.js-light');
 
-const { getUser, setDiscord, getUserFromDiscord } = require('../../database/index');
+const { getUserFromKey, setUserDiscord, getUserFromDiscord } = require('../../database/index');
 
 let name = 'linkaccount';
 let aliases = ['la', 'linkacc', 'laccount'];
+let permissions = 0;
 let run = async (msg, args, owner) => {
     let userCheck = await getUserFromDiscord(msg.author.id);
     if (userCheck !== null) return msg.channel.send(new MessageEmbed()
@@ -22,7 +23,7 @@ let run = async (msg, args, owner) => {
         .setTitle('User does not exist.')
         .setColor('#e9172b'));
 
-    await setDiscord(uKey, msg.author.id);
+    await setUserDiscord(uKey, msg.author.id);
 
     msg.delete().catch();
 
@@ -32,4 +33,4 @@ let run = async (msg, args, owner) => {
         .setColor('#e9172b'));
 };
 
-module.exports = { name, aliases, run };
+module.exports = { name, aliases, run, permissions };

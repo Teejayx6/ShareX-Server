@@ -27,14 +27,17 @@ let startBot = (token, options) => {
 
         client.on('message', async (msg) => {
             if (!msg.content.startsWith('?')) return;
+
             let args = msg.content.split(' ').slice(1);
+
             let cmdName = msg.content.split(' ')[0].slice(1).toLowerCase();
             let cmd = client.commands.get(client.cmdAliases.get(cmdName) || cmdName);
+
             if (cmd == null) return;
+
             let userData = await getUserFromDiscord(msg.author.id);
-            let owner;
-            if (userData == null) owner = false;
-            else owner = userData.owner;
+            let owner = (userData == null) ? false : userData.owner;
+
             return await cmd.run(msg, args, owner);
         });
 

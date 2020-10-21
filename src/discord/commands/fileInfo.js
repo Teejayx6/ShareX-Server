@@ -7,6 +7,7 @@ const { getFile } = require('../../database/index');
 
 let name = 'fileinfo';
 let aliases = ['fi'];
+let permissions = 100;
 let run = async (msg, args, owner) => {
     if (!owner) return msg.channel.send(new MessageEmbed()
         .setTitle(`You do not have the required permissions to run this command.`)
@@ -30,4 +31,4 @@ let run = async (msg, args, owner) => {
         .setColor('#e9172b'));
 };
 
-module.exports = { name, aliases, run };
+module.exports = { name, aliases, run, permissions };

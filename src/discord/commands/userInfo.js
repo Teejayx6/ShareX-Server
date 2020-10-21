@@ -4,6 +4,7 @@ const { getUserFromName } = require('../../database/index');
 
 let name = 'userinfo';
 let aliases = ['ui'];
+let permissions = 0;
 let run = async (msg, args, owner) => {
 
     if (!args[0]) return msg.channel.send(new MessageEmbed()
@@ -31,4 +32,4 @@ let run = async (msg, args, owner) => {
         .setColor('#1eda61'));
 };
 
-module.exports = { name, aliases, run };
+module.exports = { name, aliases, run, permissions };

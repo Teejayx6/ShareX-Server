@@ -9,7 +9,7 @@ const colors = require('colors');
 const { Router } = require('express');
 const { existsSync, mkdirSync } = require('fs');
 
-const { getUser, addUserUpload, saveFile } = require('../../database/index');
+const { getUserFromKey, addUserUpload, saveFile } = require('../../database/index');
 const { filePOST } = require('../../util/logger');
 
 const router = Router();

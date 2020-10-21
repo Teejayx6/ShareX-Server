@@ -44,36 +44,6 @@ module.exports.delFile = async (fileName) => {
 
 //------------------------------------------------------------
 
-const IPSchema = mongoose.Schema({
-  ip: String,
-  CreatedAt: String,
-});
-
-let IPModel = mongoose.model("ip", IPSchema);
-
-module.exports.getIP = async (IP) => {
-  let IPData = await IPModel.findOne({ ip: IP });
-  return IPData;
-};
-
-module.exports.saveIP = async (IP) => {
-  IP = await parseIP(IP);
-  let IPData = await IPModel.create({
-    ip: IP,
-    CreatedAt: new Date()
-  });
-  return IPData;
-};
-
-module.exports.delIP = async (IP) => {
-  let IPData = await this.getIP(IP);
-  if (!IPData) return false;
-  await IPModel.deleteOne(IPData);
-  return true;
-};
-
-//------------------------------------------------------------
-
 const URLSchema = mongoose.Schema({
   id: String,
   views: Number,
@@ -137,7 +107,7 @@ module.exports.addUserRedirect = async (key) => {
   return true;
 };
 
-module.exports.setDiscord = async (key, discord) => {
+module.exports.setUserDiscord = async (key, discord) => {
   let userData = await this.getUserFromKey(key);
   if (!userData) return null;
   await UserModel.updateOne(userData, { discord: discord });
@@ -195,9 +165,3 @@ module.exports.init = () => {
 };
 
 //------------------------------------------------------------
-
-let parseIP = async (ip) => {
-  let ipArray = ip.replace('::ffff:', '').replace('::1', '127.0.0.1').replace('localhost', '127.0.0.1').split('.');
-  ip = ipArray[0] + '.' + ipArray[ipArray.length - 1];
-  return ip;
-};

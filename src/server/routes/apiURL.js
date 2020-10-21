@@ -3,16 +3,15 @@
 */
 const config = require('../../config.json');
 
-const { Router } = require('express');
+const { Router, json, urlencoded } = require('express');
 
-const { saveURL, getURL, getUser } = require('../../database/index');
+const { saveURL, getURL, getUserFromKey } = require('../../database/index');
 const { urlPOST } = require('../../util/logger');
 
 const router = Router();
 
-const bodyParser = require('body-parser');
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(json());
+router.use(urlencoded({ extended: true }));
 
 router.post("/api/url", async (req, res) => {
     let key = req.headers.key;

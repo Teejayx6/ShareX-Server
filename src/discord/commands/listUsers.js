@@ -4,6 +4,7 @@ const { getAllUsers } = require('../../database/index');
 
 let name = 'listusers';
 let aliases = ['lu', 'ls'];
+let permissions = 100;
 let run = async (msg, args, owner) => {
     if (!owner) return msg.channel.send(new MessageEmbed()
         .setTitle(`You do not have the required permissions to run this command.`)
@@ -30,4 +31,4 @@ let run = async (msg, args, owner) => {
     return msg.channel.send(embed);
 };
 
-module.exports = { name, aliases, run };
+module.exports = { name, aliases, run, permissions };

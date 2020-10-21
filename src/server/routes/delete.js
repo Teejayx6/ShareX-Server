@@ -5,7 +5,7 @@ const { unlink } = require('fs');
 const { Router } = require('express');
 const { resolve } = require('path');
 
-const { getUser, getFile, delFile } = require('../../database/index');
+const { getUserFromKey, getFile, delFile } = require('../../database/index');
 const { fileDELETE } = require('../../util/logger');
 
 const router = Router();

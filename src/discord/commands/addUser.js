@@ -16,6 +16,7 @@ let createKey = async () => {
 
 let name = 'newuser';
 let aliases = ['newu', 'nu'];
+let permissions = 100;
 let run = async (msg, args, owner) => {
     if (!owner) return msg.channel.send(new MessageEmbed()
         .setTitle(`You do not have the required permissions to run this command.`)
@@ -50,4 +51,4 @@ let run = async (msg, args, owner) => {
         .setColor('#1eda61'));
 };
 
-module.exports = { name, aliases, run };
+module.exports = { name, aliases, run, permissions };

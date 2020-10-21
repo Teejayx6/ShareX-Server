@@ -8,13 +8,6 @@
 | saveFile | Create a new file in the DB | file data (Object) |
 | delFile | Delete a file in the DB | file name |
 
-### IP Logging
-| Function | Description | Args |
-| - | - | - |
-| getIP | Get the IP data | IP (how ever you parse it) |
-| saveIP | Create a new IP in the DB | IP data (Object) |
-| delIP | Delete the IP from the DB | IP (how ever you parse it) |
-
 ### URL Redirects
 | Function | Description | Args |
 | - | - | - |
@@ -28,7 +21,7 @@
 | - | - | - |
 | addUserUpload | Make user Uploads 1 greater than before | user key |
 | addUserRedirect | Make user Redirects 1 greater than before | user key |
-| setDiscord | Set the user's discord ID | user key, discord id |
+| setUserDiscord | Set the user's discord ID | user key, discord id |
 | getUserFromKey | Get a user from their key | user key |
 | getUserFromDiscord | Get a user from their discord | discord id |
 | getUserFromName | Get a user from their name | user name | 
