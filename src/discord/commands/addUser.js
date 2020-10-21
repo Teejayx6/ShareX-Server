@@ -3,7 +3,7 @@
 */
 const { MessageEmbed } = require('discord.js-light');
 
-const { saveUser, getUser } = require('../../database/index');
+const { saveUser, getUserFromKey } = require('../../database/index');
 
 let createKey = async () => {
     let string = Math.floor(Math.random() * (10 ** 18)).toString(36) +
@@ -41,13 +41,12 @@ let run = async (msg, args, owner) => {
         redirects: 0,
         discord: 'none',
         CreatedAt: new Date(),
-        id: Math.floor(Date.now() / 1000).toString()
     });
 
     return msg.channel.send(new MessageEmbed()
         .setTitle('Created User')
         .setThumbnail('https://cdn.discordapp.com/attachments/686689269296922682/755359943242154005/0HL9FFhngVZRSKZ.png')
-        .setDescription(`**Name**: \`${uName}\`\n**Key**: \`${key}\`\n**Owner**: \`false\``)
+        .setDescription(`**Name**: \`${uName}\`\n**Key**: \`${key}\``)
         .setColor('#1eda61'));
 };
 

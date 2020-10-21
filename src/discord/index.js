@@ -11,10 +11,11 @@ const { getUserFromDiscord } = require('../database/index');
 let defaultOptions = require('./options.json');
 
 let startBot = (token, options) => {
-    if (!token) throw new Error('No bot token provided');
+    if (!token) return console.log('Starting without a discord bot.'.red);
     try {
         let clientOptions = Object.assign(defaultOptions, options);
         let client = new Client(clientOptions);
+
         client.commands = new Collection();
         client.cmdAliases = new Collection();
 
@@ -47,7 +48,7 @@ let startBot = (token, options) => {
 
         client.login(token);
     } catch (err) {
-        return console.error(err);
+        return console.log(err);
     }
 };
 

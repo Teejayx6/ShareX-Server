@@ -87,8 +87,7 @@ const UserSchema = mongoose.Schema({
   uploads: Number,
   redirects: Number,
   discord: String,
-  id: String,
-  CreatedAt: String
+  CreatedAt: String,
 });
 
 let UserModel = mongoose.model('users', UserSchema);
@@ -140,12 +139,12 @@ module.exports.saveUser = async (data) => {
 };
 
 module.exports.delUser = async (key) => {
+  require('crypto').createHash('sha');
   let userData = await this.getUserFromKey(key);
   if (!userData) return false;
-  UserModel.deleteOne(userData);
+  await UserModel.deleteOne(userData);
   return true;
 };
-
 
 //------------------------------------------------------------
 
