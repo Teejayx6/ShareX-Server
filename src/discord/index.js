@@ -1,6 +1,8 @@
 /*
     The discord bot index.js for yes
 */
+const config = require('../config.json');
+
 const { Client, Collection } = require('discord.js-light');
 const { readdirSync } = require('fs');
 const { resolve } = require('path');
@@ -10,10 +12,10 @@ const colors = require('colors');
 const { getUserFromDiscord } = require('../database/index');
 let defaultOptions = require('./options.json');
 
-let startBot = (token, options) => {
-    if (!token) return console.log('Starting without a discord bot.'.red);
+let startBot = () => {
+    if (!config.token) return console.log('Starting without a discord bot.'.red);
     try {
-        let clientOptions = Object.assign(defaultOptions, options);
+        let clientOptions = Object.assign(defaultOptions, config.botOptions);
         let client = new Client(clientOptions);
 
         client.commands = new Collection();
