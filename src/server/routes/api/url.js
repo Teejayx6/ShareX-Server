@@ -41,12 +41,12 @@ router.get("/api/url/:id", async (req, res) => {
 router.post("/api/url", async (req, res) => {
     let key = req.headers.key;
     if (!key) return res.status(401).json({
-        "error": "No key was privided in the headers."
+        "error": "No key was provided in the headers."
     });
 
     let userData = await getUserFromKey(key);
     if (userData == null) return res.status(401).json({
-        "error": "An incorrect key was privided in the headers."
+        "error": "An incorrect key was provided in the headers."
     });
 
     let url = req.body.url;
@@ -66,9 +66,7 @@ router.post("/api/url", async (req, res) => {
 
     let mainURL = config.mainURL || "URL NOT SETUP";
     res.setHeader('Content-Type', 'application/json');
-    res.json({
-        "url": mainURL + '/url/' + redirectNum
-    });
+    res.status(200).end(mainURL + '/url/' + redirectNum);
 
     urlPOST(url, req.ip, key);
 });

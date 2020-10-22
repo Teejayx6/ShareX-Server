@@ -5,12 +5,12 @@ const { unlink } = require('fs');
 const { Router } = require('express');
 const { resolve } = require('path');
 
-const { getUserFromKey, getFile, delFile } = require('../../database/index');
-const { fileDELETE } = require('../../util/logger');
+const { getUserFromKey, getFile, delFile } = require('../../../database/index');
+const { fileDELETE } = require('../../../util/logger');
 
 const router = Router();
 
-router.get("/delete/:name", async (req, res) => {
+router.get("/api/delete/:name", async (req, res) => {
     let fileName = req.params.name;
     if (!fileName) return res.status(200).json({
         "error": "File does not exist."
@@ -21,18 +21,18 @@ router.get("/delete/:name", async (req, res) => {
         "error": "File does not exist."
     });
 
-    let key = req.query.key;
+    let key = req.headers.key;
     if (!key) return res.status(400).json({
-        "error": "No key was privided."
+        "error": "No key was provided."
     });
 
     let userData = await getUserFromKey(key);
     if (userData == null) return res.status(400).json({
-        "error": "An incorrect key was privided."
+        "error": "An incorrect key was provided."
     });
 
     if (userData.name !== fileData.uploader) return res.status(400).json({
-        "error": "An incorrect key was privided."
+        "error": "An incorrect key was provided."
     });
 
     let filePath = resolve(`${__dirname}/../../../${fileData.path}`);

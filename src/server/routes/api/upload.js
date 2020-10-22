@@ -9,7 +9,7 @@ const colors = require('colors');
 const { Router } = require('express');
 const { existsSync, mkdirSync } = require('fs');
 
-const { getUserFromKey, addUserUpload, saveFile } = require('../../../database/index');
+const { getUserFromKey, addUserUpload, saveFile, setUserDomain, setUserSubDomain } = require('../../../database/index');
 const { filePOST } = require('../../../util/logger');
 
 const router = Router();
@@ -46,12 +46,12 @@ let createFileName = (fileExt, loc, FNL) => {
 router.post('/api/upload', async (req, res) => {
     let key = req.headers.key;
     if (!key) return res.status(400).json({
-        "error": "No key was privided in the headers."
+        "error": "No key was provided in the headers."
     });
 
     let userData = await getUserFromKey(key);
     if (userData == null) return res.status(400).json({
-        "error": "An incorrect key was privided in the headers."
+        "error": "An incorrect key was provided in the headers."
     });
 
     if (!req.files || !req.files.file) return res.status(400).json({
@@ -93,19 +93,13 @@ router.post('/api/upload', async (req, res) => {
             }
         });
 
-        let mainURL = config.mainURL || "URL NOT SETUP";
+        let mainURL = userData.domain == undefined || userData.domain == "none" ? config.mainURL : (userData.subdomain == undefined || userData.subdomain == "none" ? userData.domain : `https://${userData.subdomain}.${userData.domain}`);
         let url = mainURL + '/files/' + name;
-        let delete_url = mainURL + '/delete/' + name + '?key=' + key;
 
         await addUserUpload(key);
 
         res.setHeader('Content-Type', 'application/json');
-        res.json({
-            file: {
-                url: url,
-                delete_url: delete_url
-            }
-        });
+        res.status(200).end(url);
 
         filePOST(name, req.ip, key);
     });

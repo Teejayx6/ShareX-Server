@@ -16,7 +16,7 @@ router.use(urlencoded({ extended: true }));
 router.get("/api/file/:name", async (req, res) => {
     let fileName = req.params.name;
     if (!fileName) return res.status(401).json({
-        "error": "No file name was privided in the body."
+        "error": "No file name was provided in the body."
     });
 
     let fileData = await getFile(fileName);

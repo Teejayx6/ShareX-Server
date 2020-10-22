@@ -16,12 +16,12 @@ router.use(urlencoded({ extended: true }));
 router.get("/api/user", async (req, res) => {
     let key = req.headers.key;
     if (!key) return res.status(401).json({
-        "error": "No key was privided in the headers."
+        "error": "No key was provided in the headers."
     });
 
     let userData = await getUserFromKey(key);
     if (userData == null) return res.status(401).json({
-        "error": "An incorrect key was privided in the headers."
+        "error": "An incorrect key was provided in the headers."
     });
 
     let returnObj = {
@@ -31,7 +31,9 @@ router.get("/api/user", async (req, res) => {
         "uploads": userData.uploads,
         "redirects": userData.redirects,
         "discord": userData.discord,
-        "CreatedAt": userData.CreatedAt
+        "CreatedAt": userData.CreatedAt,
+        "domain": userData.domain,
+        "subdomain": userData.subdomain
     };
 
     return res.status(200).json(returnObj);

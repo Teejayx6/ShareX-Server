@@ -68,11 +68,10 @@ Written in around seven weeks so far.
   },
   "Body": "MultipartFormData",
   "Arguments": {
-    "fnl": "4"
+    "fnl": "5"
   },
   "FileFormName": "file",
-  "URL": "$json:file.url$",
-  "DeletionURL": "$json:file.delete_url$"
+  "URL": "$response$",
 }
 ```
 
@@ -91,7 +90,7 @@ Written in around seven weeks so far.
   "Arguments": {
     "url": "$input$"
   },
-  "URL": "$json:url$"
+  "URL": "$response$"
 }
 ```
 

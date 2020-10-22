@@ -21,7 +21,8 @@ let FileModel = mongoose.model('file', FileSchema);
 module.exports.addFileView = async (fileName) => {
   let fileData = await this.getFile(fileName);
   if (!fileData) return null;
-  await FileModel.updateOne(fileData, { views: fileData.views++ });
+  let newFileViews = fileData.views + 1;
+  await FileModel.updateOne(fileData, { views: newFileViews });
   return true;
 };
 
@@ -57,7 +58,8 @@ let URLModel = mongoose.model('url', URLSchema);
 module.exports.addURLView = async (ID) => {
   let URLData = await this.getURL(ID);
   if (!URLData) return null;
-  await URLModel.updateOne(URLData, { views: URLData.views++ });
+  let newURLViews = URLData.views + 1;
+  await URLModel.updateOne(URLData, { views: newURLViews });
   return true;
 };
 
@@ -88,21 +90,45 @@ const UserSchema = mongoose.Schema({
   redirects: Number,
   discord: String,
   CreatedAt: String,
+  subdomain: String,
+  domain: String,
 });
 
 let UserModel = mongoose.model('users', UserSchema);
 
+module.exports.setUserDomain = async (key, domain) => {
+  let regex = /([a-z])/g;
+  if (!domain.match(regex)) return false;
+
+  let userData = await this.getUserFromKey(key);
+  if (!userData) return null;
+  await UserModel.updateOne(userData, { domain: domain });
+  return true;
+};
+
+module.exports.setUserSubDomain = async (key, subdomain) => {
+  let regex = /([a-z])/g;
+  if (!subdomain.match(regex)) return false;
+
+  let userData = await this.getUserFromKey(key);
+  if (!userData) return null;
+  await UserModel.updateOne(userData, { subdomain: subdomain });
+  return true;
+};
+
 module.exports.addUserUpload = async (key) => {
   let userData = await this.getUserFromKey(key);
   if (!userData) return null;
-  await UserModel.updateOne(userData, { uploads: userData.uploads++ });
+  let newUploads = userData.uploads + 1;
+  await UserModel.updateOne(userData, { uploads: newUploads });
   return true;
 };
 
 module.exports.addUserRedirect = async (key) => {
   let userData = await this.getUserFromKey(key);
   if (!userData) return null;
-  await UserModel.updateOne(userData, { redirect: userData.redirect++ });
+  let newRedirect = userData.redirect + 1;
+  await UserModel.updateOne(userData, { redirect: newRedirect });
   return true;
 };
 

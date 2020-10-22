@@ -7,6 +7,7 @@
 */
 const api = {};
 api.file = require('./api/file');
+api.deleteFile = require('./api/delete');
 api.upload = require('./api/upload');
 api.url = require('./api/url');
 api.user = require('./api/user');
@@ -14,7 +15,6 @@ api.user = require('./api/user');
 /*
     GET requests (browsers) 
 */
-const deleteFile = require('./delete');
 const File = require('./files');
 const URL = require('./url');
 
@@ -26,10 +26,10 @@ let setup = (app) => {
     app.use(api.upload);
     app.use(api.url);
     app.use(api.user);
-    app.use(deleteFile);
+    app.use(api.deleteFile);
     app.use(File);
     app.use(URL);
 };
 
 //module exports (maybe I should change to exports default?)
-module.exports = { api, deleteFile, File, URL, setup };
+module.exports = { api, File, URL, setup };

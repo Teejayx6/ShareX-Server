@@ -41,6 +41,8 @@ let run = async (msg, args, owner) => {
         redirects: 0,
         discord: 'none',
         CreatedAt: new Date(),
+        subdomain: "none",
+        domain: "none",
     });
 
     return msg.channel.send(new MessageEmbed()
