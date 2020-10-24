@@ -94,7 +94,7 @@ router.post('/api/upload', async (req, res) => {
             }
         });
 
-        let mainURL = userData.domain == undefined || userData.domain == "none" ? config.mainURL : (userData.subdomain == undefined || userData.subdomain == "none" ? userData.domain : `https://${userData.subdomain}.${userData.domain}`);
+        let mainURL = userData.domain == undefined || userData.domain == "none" ? config.mainURL : (userData.subdomain == undefined || userData.subdomain == "none" ? config.mainURL : `https://${userData.subdomain}.${userData.domain}`);
         let url = mainURL + '/files/' + name;
 
         await addUserUpload(key);

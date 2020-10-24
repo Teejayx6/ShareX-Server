@@ -149,6 +149,11 @@ module.exports.getUserFromDiscord = async (discord) => {
   return userData;
 };
 
+module.exports.getUserFromSubDomain = async (subdomain) => {
+  let userData = await UserModel.findOne({ subdomain: subdomain });
+  return userData;
+};
+
 module.exports.getUserFromName = async (name) => {
   let userData = await UserModel.findOne({ name: name });
   return userData;
