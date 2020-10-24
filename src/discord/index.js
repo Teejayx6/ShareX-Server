@@ -29,7 +29,7 @@ let startBot = () => {
         }
 
         client.on('message', async (msg) => {
-            if (!msg.content.startsWith('?')) return;
+            if (!msg.content.startsWith('-')) return;
 
             let args = msg.content.split(' ').slice(1);
 

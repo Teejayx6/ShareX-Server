@@ -13,6 +13,13 @@ const router = Router();
 router.use(json());
 router.use(urlencoded({ extended: true }));
 
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 25
+});
+router.use(limiter);
+
 router.get("/api/file/:name", async (req, res) => {
     let fileName = req.params.name;
     if (!fileName) return res.status(401).json({

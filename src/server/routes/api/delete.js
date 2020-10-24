@@ -10,7 +10,14 @@ const { fileDELETE } = require('../../../util/logger');
 
 const router = Router();
 
-router.get("/api/delete/:name", async (req, res) => {
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 75
+});
+router.use(limiter);
+
+router.delete("/api/delete/:name", async (req, res) => {
     let fileName = req.params.name;
     if (!fileName) return res.status(200).json({
         "error": "File does not exist."
@@ -41,12 +48,12 @@ router.get("/api/delete/:name", async (req, res) => {
         if (err) throw err;
     });
 
-    res.status(400).json({
+    fileDELETE(fileData.name, req.ip, key);
+
+    return res.status(400).json({
         "success": true,
         "message": "File was deleted."
     });
-
-    fileDELETE(fileData.name, req.ip, key);
 });
 
 module.exports = router;

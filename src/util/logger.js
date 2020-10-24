@@ -40,7 +40,13 @@ module.exports.fileGET = async (name, ip) => {
 
 module.exports.fileDELETE = async (name, ip, key) => {
   ip = await parseIP(ip);
-  let msg = `${'[POST]'.cyan} ${'DELETED FILE'.bgRed.black} ${name.toString().bgBlue.black} ${key.toString().bgYellow.black} ${ip.toString().bgWhite.black}`;
+  let msg = `${'[DELETE]'.cyan} ${'DELETED FILE'.bgRed.black} ${name.toString().bgBlue.black} ${key.toString().bgYellow.black} ${ip.toString().bgWhite.black}`;
+  console.log(msg);
+};
+
+module.exports.userAPIGET = async (name, key, ip) => {
+  ip = await parseIP(ip);
+  let msg = `${'[GET]'.cyan} ${'SENT USER DATA'.bgMagenta.black} ${name.toString().bgBlue.black} ${key.toString().bgYellow.black} ${ip.toString().bgWhite.black}`;
   console.log(msg);
 };
 

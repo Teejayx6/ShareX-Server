@@ -8,6 +8,13 @@ const { urlGET } = require('../../util/logger');
 
 const router = Router();
 
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 15
+});
+router.use(limiter);
+
 router.get("/url/:id", async (req, res) => {
     let URLID = req.params.id;
     if (!URLID) return res.status(404).json({
@@ -20,9 +27,10 @@ router.get("/url/:id", async (req, res) => {
     });
 
     await addURLView(URLID);
-    res.status(302).redirect(URLData.redirect);
 
     urlGET(req.ip, URLData.redirect);
+
+    return res.status(302).redirect(URLData.redirect);
 });
 
 module.exports = router;

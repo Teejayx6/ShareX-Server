@@ -6,12 +6,19 @@ const config = require('../../../config.json');
 const { Router, json, urlencoded } = require('express');
 
 const { getUserFromKey } = require('../../../database/index');
-const { urlPOST } = require('../../../util/logger');
+const { userAPIGET } = require('../../../util/logger');
 
 const router = Router();
 
 router.use(json());
 router.use(urlencoded({ extended: true }));
+
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 25
+});
+router.use(limiter);
 
 router.get("/api/user", async (req, res) => {
     let key = req.headers.key;
@@ -35,6 +42,8 @@ router.get("/api/user", async (req, res) => {
         "domain": userData.domain,
         "subdomain": userData.subdomain
     };
+
+    userAPIGET(userData.name, userData.key, req.ip);
 
     return res.status(200).json(returnObj);
 });

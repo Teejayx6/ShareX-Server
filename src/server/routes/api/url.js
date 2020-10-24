@@ -13,15 +13,36 @@ const router = Router();
 router.use(json());
 router.use(urlencoded({ extended: true }));
 
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 25
+});
+router.use(limiter);
+
 router.get("/api/url/:id", async (req, res) => {
+    let key = req.headers.key;
+    if (!key) return res.status(401).json({
+        "error": "No key was provided in the headers."
+    });
+
+    let userData = await getUserFromKey(key);
+    if (userData == null) return res.status(401).json({
+        "error": "An incorrect key was provided in the headers."
+    });
+
     let urlID = req.params.id;
-    if (!urlID) return res.status(401).json({
+    if (!urlID) return res.status(400).json({
         "error": "No URL ID provided."
     });
 
     let urlData = await getURL(urlID);
-    if (urlData == null) return res.status(401).json({
+    if (urlData == null) return res.status(400).json({
         "error": "URL not found."
+    });
+
+    if (urlData.uploader !== userData.name && userData.owner !== true) return res.status(401).json({
+        "error": "You do not have access."
     });
 
     let returnObj = {
@@ -65,10 +86,11 @@ router.post("/api/url", async (req, res) => {
     });
 
     let mainURL = config.mainURL || "URL NOT SETUP";
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).end(mainURL + '/url/' + redirectNum);
 
     urlPOST(url, req.ip, key);
+
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(200).end(mainURL + '/url/' + redirectNum);
 });
 
 let CreateUrl = async (length) => {

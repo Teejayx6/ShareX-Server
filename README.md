@@ -39,6 +39,14 @@ Written in around seven weeks so far.
 
 ## Info
 
+### TODO
+
+* Adding comments to code, to make it easier for other people
+* Add many other databases
+* Make a frontend in vue, ejs, or react (pls help idfk how to do frontend)
+
+---
+
 ### Example config.json
 
 ```json

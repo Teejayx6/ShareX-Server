@@ -10,6 +10,13 @@ const { fileGET } = require('../../util/logger');
 
 const router = Router();
 
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 15
+});
+router.use(limiter);
+
 router.get("/files/:name", async (req, res) => {
     let fileName = req.params.name;
     if (!fileName) return res.status(203).redirect('/404.html');
@@ -21,9 +28,10 @@ router.get("/files/:name", async (req, res) => {
 
     let filePath = resolve(`${__dirname}/../../../${fileData.path}`);
     if (!existsSync(filePath)) return res.status(203).redirect('/404.html');
-    res.sendFile(filePath);
 
     fileGET(fileName, req.ip);
+
+    return res.sendFile(filePath);
 });
 
 module.exports = router;

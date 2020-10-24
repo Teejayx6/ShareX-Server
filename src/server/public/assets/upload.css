@@ -1,0 +1,95 @@
+@font-face {
+    font-family: CascadiaCode-Regular;
+    src: url('/fonts/CascadiaCode-Regular.otf');
+}
+
+* {
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+body {
+    font-family: "CascadiaCode-Regular";
+    background: rgb(38, 38, 38);
+    margin: 0;
+}
+
+.title {
+    margin-top: 200px;
+    font-size: xx-large;
+    color: white;
+}
+
+.home {
+    color: white;
+    background: #551a8b;
+    display: inline-flex;
+    margin-top: 2ch;
+    padding: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.home:hover {
+    transform: translateY(3px);
+    background: #451770;
+}
+
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    /* show a hand cursor on hover; some argue that we
+  should keep the default arrow cursor for buttons */
+    cursor: pointer;
+    display: inline;
+}
+
+button {
+    text-decoration: none;
+    color: white;
+    background: #551a8b;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 1%;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    font-size: 18px;
+}
+
+#error {
+    cursor: pointer;
+}
+
+input[type=file] {
+    /* width: 10%; */
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=text] {
+    width: 15%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input {
+    color: #551a8b;
+    background: white;
+    border-radius: 4%;
+}

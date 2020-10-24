@@ -14,6 +14,13 @@ const { filePOST } = require('../../../util/logger');
 
 const router = Router();
 
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 25
+});
+router.use(limiter);
+
 const fileUpload = require('express-fileupload');
 router.use(fileUpload({
     safeFileNames: true,
@@ -29,15 +36,9 @@ let toUpperCaseLetter = (word) => {
 };
 
 let createFileName = (fileExt, loc, FNL) => {
-    let newFileNameArray = [];
     if (typeof FNL !== 'number') throw new Error('File name length is not a number.');
 
-    for (let i = 0; i < FNL; i++) {
-        let word = toUpperCaseLetter(words.filter(f => f.length < 5)[Math.round(Math.random() * 6972)]);
-        newFileNameArray.push(word);
-    }
-
-    let nFN = newFileNameArray.join('') + '.' + fileExt;
+    let nFN = Math.floor(Math.random() * 9007199254740991).toString(36) + '.' + fileExt;
     let fileLocation = `./uploads/${loc}/${nFN}.${fileExt}`;
     if (existsSync(fileLocation)) return createFileName(fileExt, loc, FNL);
     return nFN;
@@ -98,10 +99,10 @@ router.post('/api/upload', async (req, res) => {
 
         await addUserUpload(key);
 
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).end(url);
-
         filePOST(name, req.ip, key);
+
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).end(url);
     });
 });
 
