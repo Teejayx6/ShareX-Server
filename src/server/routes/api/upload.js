@@ -8,6 +8,7 @@ const colors = require('colors');
 
 const { Router } = require('express');
 const { existsSync, mkdirSync } = require('fs');
+const path = require('path');
 
 const { getUserFromKey, addUserUpload, saveFile, setUserDomain, setUserSubDomain } = require('../../../database/index');
 const { filePOST } = require('../../../util/logger');
@@ -24,7 +25,9 @@ router.use(limiter);
 const fileUpload = require('express-fileupload');
 router.use(fileUpload({
     safeFileNames: true,
-    preserveExtension: true,
+    preserveExtension: 7,
+    useTempFiles: true,
+    tempFileDir: path.resolve(__dirname + '../../../temp/'),
     limits: {
         fileSize: config.maxFileSize || 9007199254740991
     }
