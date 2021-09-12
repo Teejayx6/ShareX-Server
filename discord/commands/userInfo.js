@@ -8,7 +8,7 @@ let run = async (msg, args, owner) => {
 
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include the name of a user.`)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     let uName = args[0];
 
@@ -16,7 +16,7 @@ let run = async (msg, args, owner) => {
 
     if (userData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('User does not exist.')
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     if (!owner) {
         return msg.channel.send(new MessageEmbed()
