@@ -1,7 +1,7 @@
 /* 
     The router for uploading a file
 */
-const words = require('an-array-of-english-words');
+const random = randomString = require('random-string');
 const config = require('../config.json');
 const colors = require('colors');
 const { Router } = require('express');
@@ -42,7 +42,7 @@ let createFileName = (fileExt, loc, FNL) => {
     if (typeof FNL !== 'number') throw new Error('File name length is not a number.');
 
     for (let i = 0; i < FNL; i++) {
-        let word = toUpperCaseLetter(words.filter(f => f.length < 5)[Math.round(Math.random() * 6972)]);
+        let word = randomString({ length: FNL });
         newFileNameArray.push(word);
     }
 
