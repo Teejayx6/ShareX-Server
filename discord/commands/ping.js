@@ -8,7 +8,7 @@ let aliases = ['fuckoff'];
 let run = async (msg, args, owner) => {
     return msg.channel.send(new MessageEmbed()
         .setTitle(`Ping! | ${msg.client.ws.ping}ms`)
-        .setColor('#1eda61'));
+        .setColor('#4693f2'));
 };
 
 module.exports = { name, aliases, run };
