@@ -1,3 +1,8 @@
+#4693f2
+
+
+
+
 /*
     The command to delete users
 */
@@ -10,11 +15,11 @@ let aliases = ['delu', 'du'];
 let run = async (msg, args, owner) => {
     if (!owner) return msg.channel.send(new MessageEmbed()
         .setTitle(`You do not have the required permissions to run this command.`)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include the name of a user.`)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     let uName = args[0];
 
@@ -22,17 +27,17 @@ let run = async (msg, args, owner) => {
 
     if (userData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('User does not exist.')
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     if (userData.owner) return msg.channel.send(new MessageEmbed()
         .setTitle('You cannot delete a user marked as owner.\nTry demoting them first.')
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     await userModel.deleteOne({ name: uName });
 
     return msg.channel.send(new MessageEmbed()
         .setTitle(`Deleted User: \`${uName}\``)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 };
 
 module.exports = { name, aliases, run };
