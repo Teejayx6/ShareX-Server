@@ -8,11 +8,11 @@ let run = async (msg, args, owner) => {
     let userCheck = await userModel.findOne({ discord: msg.author.id });
     if (userCheck !== null) return msg.channel.send(new MessageEmbed()
         .setTitle('You already have an account linked.')
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include a key.`)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     let uKey = args[0];
 
@@ -20,7 +20,7 @@ let run = async (msg, args, owner) => {
 
     if (userData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('User does not exist.')
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     await userModel.findOneAndUpdate({ key: uKey }, { discord: msg.author.id });
 
@@ -29,7 +29,7 @@ let run = async (msg, args, owner) => {
     return msg.channel.send(new MessageEmbed()
         .setTitle('User Updated.')
         .setDescription(`**User**: \`${userData.name}\`\n**Discord ID**: \`${msg.author.id}\`\n`)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 };
 
 module.exports = { name, aliases, run };
