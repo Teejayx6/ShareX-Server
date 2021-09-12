@@ -22,13 +22,13 @@ let run = async (msg, args, owner) => {
         return msg.channel.send(new MessageEmbed()
             .setTitle(`User: \`${uName}\``)
             .setDescription(`**Uploads**: \`${userData.uploads}\`\n**Redirects**: \`${userData.redirects}\``)
-            .setColor('#1eda61'));
+            .setColor('#4693f2'));
     }
 
     return msg.channel.send(new MessageEmbed()
         .setTitle(`User: \`${uName}\``)
         .setDescription(`**Key**: \`${userData.key}\`\n**Owner**: \`${userData.owner}\`\n**Uploads**: \`${userData.uploads}\`\n**Redirects**: \`${userData.redirects}\``)
-        .setColor('#1eda61'));
+        .setColor('#4693f2'));
 };
 
 module.exports = { name, aliases, run };
