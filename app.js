@@ -2,7 +2,7 @@
     The ShareX Server main file.
 */
 const config = require('./config.json');
-let PORT = config.port || 1234;
+let PORT = config.port || 3000;
 let connectURI = config.connectURI || "mongodb://localhost/sharex-server";
 
 const router = require('./routes');
