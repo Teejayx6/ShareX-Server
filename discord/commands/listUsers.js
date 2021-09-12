@@ -7,13 +7,13 @@ let aliases = ['lu', 'ls'];
 let run = async (msg, args, owner) => {
     if (!owner) return msg.channel.send(new MessageEmbed()
         .setTitle(`You do not have the required permissions to run this command.`)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     let data = await userModel.find();
 
     let embed = new MessageEmbed()
         .setTitle("Users")
-        .setColor('#1eda61');
+        .setColor('#4693f2');
 
     let dataArray = [];
 
