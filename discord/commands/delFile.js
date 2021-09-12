@@ -1,3 +1,8 @@
+##4693f2
+
+
+
+
 /*
     The command to delete a file
 */
@@ -13,25 +18,25 @@ let aliases = ['delfile', 'df'];
 let run = async (msg, args, owner) => {
     if (!args[0]) return msg.channel.send(new MessageEmbed()
         .setTitle(`You must include a file name. (Including the file extension)`)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
     let fileName = args[0];
 
     let fileData = await fileModel.findOne({ name: fileName });
     if (fileData == null) return msg.channel.send(new MessageEmbed()
         .setTitle('File Not Found.')
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     let userData = await userModel.findOne({ discord: msg.author.id });
     if (userData == null || userData.name !== fileData.uploader) return msg.channel.send(new MessageEmbed()
         .setTitle('You are not the owner of that file.')
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 
     let filePath = resolve(__dirname + `../../../${fileData.path}`);
     if (!existsSync(filePath)) {
         await fileModel.deleteOne({ name: fileName });
         return msg.channel.send(new MessageEmbed()
             .setTitle('File Not Found.')
-            .setColor('#e9172b'));
+            .setColor('#4693f2'));
     }
     try {
         await fileModel.deleteOne({ name: fileName });
@@ -40,12 +45,12 @@ let run = async (msg, args, owner) => {
         console.error(err);
         return msg.channel.send(new MessageEmbed()
             .setTitle('An unknown error has occured.\nPlease try again.')
-            .setColor('#e9172b'));
+            .setColor('#4693f2'));
     }
 
     return msg.channel.send(new MessageEmbed()
         .setTitle(`Deleted File: \`${fileName}\``)
-        .setColor('#e9172b'));
+        .setColor('#4693f2'));
 };
 
 module.exports = { name, aliases, run };
