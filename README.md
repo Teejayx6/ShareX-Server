@@ -42,7 +42,9 @@ Written in around one week so far.
   "connectURI": "mongodb://localhost/sharex",  
   "mainURL": "https://example.com",  
   "token": "[DISCORD BOT TOKEN]",  
-  "userID": "277183033344524288"  
+  "userID": "277183033344524288",
+  "uploadURL": "https://exmample.com/api/url"
+
 }
 ```
 
