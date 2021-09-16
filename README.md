@@ -1,5 +1,8 @@
 # ShareX Server
 
+#INFO
+THIS HAS MOVED TO https://github.com/Teejayx6/Sharex SO IT CAN BE SHOWN IN THE SEARCH BAR 
+
 ## About
 
 This is a ShareX server that I made.
