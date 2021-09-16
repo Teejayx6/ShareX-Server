@@ -1,0 +1,8 @@
+{
+  "maxFileSize": 9007199254740991,
+  "connectURI": "MONGO DB URL",
+  "mainURL": "MAIN DOMAIN YOUR RUNNING SERVER ON",
+  "token": "YOUR DISCORD BOT TOKEN",
+  "userID": "Your DISCORD ID",
+  "uploadURL": "THE MAIN URL WITH /api/url"
+}
